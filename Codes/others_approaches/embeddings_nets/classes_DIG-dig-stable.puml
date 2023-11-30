@@ -1,0 +1,2144 @@
+@startuml classes_DIG-dig-stable
+set namespaceSeparator none
+class "BA_LRP" as dig.xgraph.dataset.syn_dataset.BA_LRP {
+  data
+  name : str
+  num_per_class : int
+  processed_dir
+  processed_file_names
+  raw_dir
+  raw_file_names
+  slices
+  url : str
+  download()
+  gen_class1()
+  gen_class2()
+  process()
+}
+class "CatDegOnehot" as dig.sslgraph.dataset.feat_expansion.CatDegOnehot {
+  cat : bool
+  in_degree : bool
+  max_degree
+}
+class "ComENet" as dig.threedgraph.method.comenet.comenet.ComENet {
+  act
+  cutoff : float
+  emb
+  feature1
+  feature2
+  interaction_blocks : ModuleList
+  lin_out
+  lins : ModuleList
+  num_layers : int
+  out_channels : int
+  forward(batch_data)
+  reset_parameters()
+}
+class "ConstPropOptEvaluator" as dig.ggraph.evaluation.metric.ConstPropOptEvaluator {
+  eval(input_dict)
+}
+class "Contrastive" as dig.sslgraph.method.contrastive.model.contrastive.Contrastive {
+  choice_model : str
+  device : NoneType
+  graph_level : bool
+  loss_fn
+  model_path : str
+  neg_by_crpt : bool
+  node_level : bool
+  per_epoch_out : bool
+  proj : NoneType
+  proj_head_g : NoneType
+  proj_head_n : NoneType
+  proj_n : NoneType
+  proj_out_dim : NoneType
+  tau : float
+  views_fn
+  z_dim : NoneType
+  z_n_dim : NoneType
+  train(encoder, data_loader, optimizer, epochs, per_epoch_out)
+  train_encoder_graph(encoder, data_loader, optimizer, epochs)
+  train_encoder_node(encoder, data_loader, optimizer, epochs)
+  train_encoder_node_graph(encoder, data_loader, optimizer, epochs)
+}
+class "DataIterator" as dig.ggraph.method.GraphDF.train_utils.DataIterator {
+  iterator
+  one_shot_iterator(dataloader)
+}
+class "DataIterator" as dig.ggraph.method.GraphAF.train_utils.DataIterator {
+  iterator
+  one_shot_iterator(dataloader)
+}
+class "DeepLIFT" as dig.xgraph.method.deeplift.DeepLIFT {
+  hard_edge_mask
+  new_node_idx
+  subset
+  forward(x: Tensor, edge_index: Tensor)
+}
+class "DeepLift" as dig.xgraph.models.ext.deeplift.deep_lift.DeepLift {
+  backward_handles : List[RemovableHandle]
+  forward_handles : List[RemovableHandle]
+  model : Module
+  attribute(inputs: TensorOrTupleOfTensorsGeneric, baselines: BaselineType, target: TargetType, additional_forward_args: Any, return_convergence_delta: Literal[False], custom_attribution_func: Union[None, Callable[..., Tuple[Tensor, ...]]]) -> TensorOrTupleOfTensorsGeneric
+  has_convergence_delta() -> bool
+  satisfies_attribute_criteria(module: Module) -> bool
+}
+class "DeepLiftShap" as dig.xgraph.models.ext.deeplift.deep_lift.DeepLiftShap {
+  attribute(inputs: TensorOrTupleOfTensorsGeneric, baselines: Union[TensorOrTupleOfTensorsGeneric, Callable[..., TensorOrTupleOfTensorsGeneric]], target: TargetType, additional_forward_args: Any, return_convergence_delta: Literal[False], custom_attribution_func: Union[None, Callable[..., Tuple[Tensor, ...]]]) -> TensorOrTupleOfTensorsGeneric
+}
+class "Diffusion" as dig.sslgraph.method.contrastive.views_fn.structure.Diffusion {
+  add_self_loop : bool
+  alpha : float
+  mode : str
+  t : int
+  do_trans(data)
+  views_fn(data)
+}
+class "DiffusionWithSample" as dig.sslgraph.method.contrastive.views_fn.structure.DiffusionWithSample {
+  add_self_loop : bool
+  alpha : float
+  batch_size : int
+  epsilon : bool
+  mode : str
+  sample_size : int
+  t : int
+  views_fn(data)
+}
+class "DimeNetPP" as dig.threedgraph.method.dimenetpp.dimenetpp.DimeNetPP {
+  cutoff : float
+  emb
+  energy_and_force : bool
+  init_e
+  init_u
+  init_v
+  update_es : ModuleList
+  update_us : ModuleList
+  update_vs : ModuleList
+  forward(batch_data)
+  reset_parameters()
+}
+class "DisGraphAF" as dig.ggraph.method.GraphDF.model.disgraphaf.DisGraphAF {
+  batchNorm : BatchNorm1d
+  edge_st_net : ModuleList
+  emb_size : int
+  graph_size : int
+  index_select_edge : Parameter
+  mask_edge : Parameter
+  mask_node : Parameter
+  node_st_net : ModuleList
+  num_edge_type : int
+  num_flow_layer : int
+  num_node_type : int
+  repeat_num
+  rgcn
+  forward(x, adj, x_deq, adj_deq)
+  forward_rl_edge(x, adj, x_cont, index)
+  forward_rl_node(x, adj, x_cont)
+  reverse(x, adj, latent, mode, edge_index)
+}
+class "EdgeGraphConv" as dig.threedgraph.method.comenet.comenet.EdgeGraphConv {
+  message(x_j, edge_weight) -> Tensor
+}
+class "EdgePerturbation" as dig.sslgraph.method.contrastive.views_fn.structure.EdgePerturbation {
+  add : bool
+  drop : bool
+  ratio : float
+  do_trans(data)
+  views_fn(data)
+}
+class "EmbeddingBlock" as dig.threedgraph.method.comenet.comenet.EmbeddingBlock {
+  act
+  emb : Embedding
+  forward(x)
+  reset_parameters()
+}
+class "Encoder" as dig.sslgraph.utils.encoders.Encoder {
+  encoder
+  graph_level : bool
+  node_level : bool
+  forward(data)
+}
+class "EnergyFunc" as dig.ggraph.method.GraphEBM.energy_func.EnergyFunc {
+  depth : int
+  dropout : int
+  graphconv : ModuleList
+  graphconv1
+  linear : Linear
+  swish : bool
+  forward(adj, h)
+}
+class "Envelope" as dig.threedgraph.method.spherenet.features.Envelope {
+  a
+  b
+  c
+  p
+  forward(x)
+}
+class "Envelope" as dig.threedgraph.method.dimenetpp.features.Envelope {
+  a
+  b
+  c
+  p
+  forward(x)
+}
+class "Envelope" as dig.ggraph3D.method.G_SphereNet.model.features.Envelope {
+  a
+  b
+  c
+  p
+  forward(x)
+}
+class "ExplainerBase" as dig.xgraph.method.base_explainer.ExplainerBase {
+  device : NoneType
+  edge_mask : NoneType, Parameter
+  epochs : int
+  ex_labels : NoneType
+  explain_graph : bool
+  hard_edge_mask : NoneType
+  lr : float
+  model : Module
+  molecule : bool
+  mp_layers
+  node_feat_mask : Parameter
+  node_feat_masks : NoneType
+  num_edges : NoneType
+  num_layers
+  num_nodes : NoneType
+  ori_pred : NoneType
+  table
+  control_sparsity(mask: Tensor, sparsity)
+  eval_related_pred(x: Tensor, edge_index: Tensor, edge_masks: List[Tensor])
+  forward(x: Tensor, edge_index: Tensor)
+  visualize_graph(node_idx: int, edge_index: Tensor, edge_mask: Tensor, y: Tensor, threshold: float, nolabel: bool) -> Tuple[Axes, nx.DiGraph]
+}
+class "ExplanationProcessor" as dig.xgraph.evaluation.metrics.ExplanationProcessor {
+  device
+  edge_mask : NoneType
+  model : Module
+  mp_layers
+  num_edges
+  num_layers
+  num_nodes
+  eval_related_pred(x: torch.Tensor, edge_index: torch.Tensor, masks: List[torch.Tensor])
+  forward(data: Data, masks: List[torch.Tensor], x_collector: XCollector)
+}
+class "FeatureExpander" as dig.sslgraph.dataset.feat_expansion.FeatureExpander {
+  AK : int
+  centrality : bool
+  degree : bool
+  edge_noises_add : int
+  edge_noises_delete : int
+  edge_norm_diag : float
+  group_degree : int
+  onehot_maxdeg : int
+  remove_edges : str
+  compute_akx(num_nodes, x, edge_index, edge_weight)
+  compute_centrality(data)
+  compute_degree(edge_index, num_nodes)
+  empty_feature(num_nodes)
+  message(x_j, norm)
+  norm(edge_index, num_nodes, edge_weight, diag_val, dtype)
+  transform(data)
+}
+class "GCN" as dig.sslgraph.utils.encoders.GCN {
+  acts : ModuleList
+  add_self_loops : bool
+  bns : NoneType, ModuleList
+  convs : ModuleList
+  edge_weight : bool
+  n_layers : int
+  normalize : bool
+  pool : str
+  forward(data)
+  weights_init(m)
+}
+class "GCNConv" as dig.xgraph.models.models.GCNConv {
+  edge_weight : NoneType, Optional[OptTensor]
+  weight : Parameter
+  forward(x: Tensor, edge_index: Adj, edge_weight: Optional[OptTensor]) -> Tensor
+  propagate(edge_index: Adj, size: Size)
+}
+class "GCNConv_mask" as dig.xgraph.models.models.GCNConv_mask {
+  edge_weight : Optional[OptTensor], NoneType
+  weight : Parameter
+  forward(x: Tensor, edge_index: Adj, edge_weight: Optional[OptTensor]) -> Tensor
+  propagate(edge_index: Adj, size: Size)
+}
+class "GCN_2l" as dig.xgraph.models.models.GCN_2l {
+  conv1
+  convs : ModuleList
+  dropout : Dropout
+  ffn : Sequential
+  readout
+  relu1 : ReLU
+  relus : ModuleList
+  forward() -> torch.Tensor
+  get_emb() -> torch.Tensor
+}
+class "GCN_2l_mask" as dig.xgraph.models.models.GCN_2l_mask {
+  conv1
+  convs : ModuleList
+  dropout : Dropout
+  ffn : Sequential
+  readout
+  relu1 : ReLU
+  relus : ModuleList
+  forward() -> torch.Tensor
+  get_emb() -> torch.Tensor
+}
+class "GCN_3l" as dig.xgraph.models.models.GCN_3l {
+  conv1
+  convs : ModuleList
+  dropout : Dropout
+  ffn : Sequential
+  readout
+  relu1 : ReLU
+  relus : ModuleList
+  forward() -> torch.Tensor
+  get_emb() -> torch.Tensor
+}
+class "GIN" as dig.sslgraph.utils.encoders.GIN {
+  act : PReLU, ReLU
+  bns : NoneType, ModuleList
+  convs : ModuleList
+  n_layers : int
+  pool : str
+  forward(data)
+  weights_init(module)
+}
+class "GINConv" as dig.xgraph.models.models.GINConv {
+  edge_weight : NoneType
+  fc_steps : NoneType, list
+  num_nodes
+  reweight : bool, NoneType
+  forward(x: Union[Tensor, OptPairTensor], edge_index: Adj, edge_weight: OptTensor, task) -> Tensor
+  message(x_j: Tensor) -> Tensor
+  propagate(edge_index: Adj, size: Size)
+}
+class "GINConv_mask" as dig.xgraph.models.models.GINConv_mask {
+  edge_weight : NoneType
+  fc_steps : NoneType, list
+  num_nodes
+  reweight : bool, NoneType
+  forward(x: Union[Tensor, OptPairTensor], edge_index: Adj, edge_weight: OptTensor, task) -> Tensor
+  message(x_j: Tensor) -> Tensor
+  propagate(edge_index: Adj, size: Size)
+}
+class "GIN_2l" as dig.xgraph.models.models.GIN_2l {
+  conv1
+  convs : ModuleList
+  dropout : Dropout
+  ffn : Sequential
+  readout
+  relu1 : ReLU
+  relus : ModuleList
+  forward() -> torch.Tensor
+  get_emb() -> torch.Tensor
+}
+class "GIN_2l_mask" as dig.xgraph.models.models.GIN_2l_mask {
+  conv1
+  convs : ModuleList
+  dropout : Dropout
+  ffn : Sequential
+  readout
+  relu1 : ReLU
+  relus : ModuleList
+  forward() -> torch.Tensor
+  get_emb() -> torch.Tensor
+}
+class "GIN_3l" as dig.xgraph.models.models.GIN_3l {
+  conv1
+  convs : ModuleList
+  dropout : Dropout
+  ffn : Sequential
+  readout
+  relu1 : ReLU
+  relus : ModuleList
+  forward() -> torch.Tensor
+  get_emb() -> torch.Tensor
+}
+class "GNNBasic" as dig.xgraph.models.models.GNNBasic {
+  arguments_read()
+}
+class "GNNExplainer" as dig.xgraph.method.gnnexplainer.GNNExplainer {
+  coff_ent : float
+  coff_size : float
+  hard_edge_mask
+  mask_features : bool
+  new_node_idx
+  node_idx
+  subset
+  forward(x, edge_index, mask_features)
+  gnn_explainer_alg(x: Tensor, edge_index: Tensor, ex_label: Tensor, mask_features: bool) -> Tensor
+}
+class "GNNPool" as dig.xgraph.models.models.GNNPool {
+}
+class "GNN_GI" as dig.xgraph.method.gnn_gi.GNN_GI {
+  hard_edge_mask
+  new_node_idx
+  subset
+  forward(x: Tensor, edge_index: Tensor)
+}
+class "GNN_LRP" as dig.xgraph.method.gnn_lrp.GNN_LRP {
+  hard_edge_mask
+  new_node_idx
+  subset
+  forward(x: Tensor, edge_index: Tensor)
+}
+class "GRACE" as dig.sslgraph.method.contrastive.model.grace.GRACE {
+  train(encoders, data_loader, optimizer, epochs, per_epoch_out)
+}
+class "G_SphereNet" as dig.ggraph3D.method.G_SphereNet.gspherenet.G_SphereNet {
+  model : NoneType
+  generate(model_conf_dict, checkpoint_path, n_mols, chunk_size, num_min_node, num_max_node, temperature, focus_th)
+  get_model(model_conf_dict, checkpoint_path)
+  load_pretrain_model(path)
+  train(loader, lr, wd, max_epochs, model_conf_dict, checkpoint_path, save_interval, save_dir)
+}
+class "Generator" as dig.ggraph.method.generator.Generator {
+  run_const_prop_opt()
+  run_prop_opt()
+  run_rand_gen()
+  train_const_prop_opt(loader)
+  train_prop_opt()
+  train_rand_gen(loader)
+}
+class "GlobalMeanPool" as dig.xgraph.models.models.GlobalMeanPool {
+  forward(x, batch)
+}
+class "GradCAM" as dig.xgraph.method.gradcam.GradCAM {
+  explain_method
+  hard_edge_mask
+  new_node_idx
+  subset
+  forward(x: Tensor, edge_index: Tensor) -> Union[Tuple[None, List, List[Dict]], Tuple[List, List, List[Dict]]]
+}
+class "GraphAF" as dig.ggraph.method.GraphAF.graphaf.GraphAF {
+  model : NoneType
+  get_model(task, model_conf_dict, checkpoint_path)
+  load_pretrain_model(path)
+  run_cons_optim(dataset, model_conf_dict, checkpoint_path, repeat_time, min_optim_time, num_max_node, temperature, atomic_num_list)
+  run_cons_optim_one_mol(adj, x, org_smile, mol_size, bfs_perm_origin, max_size_rl, temperature, atom_list)
+  run_prop_optim(model_conf_dict, checkpoint_path, n_mols, num_min_node, num_max_node, temperature, atomic_num_list)
+  run_rand_gen(model_conf_dict, checkpoint_path, n_mols, num_min_node, num_max_node, temperature, atomic_num_list)
+  train_cons_optim(loader, lr, wd, max_iters, warm_up, model_conf_dict, pretrain_path, save_interval, save_dir)
+  train_prop_optim(lr, wd, max_iters, warm_up, model_conf_dict, pretrain_path, save_interval, save_dir)
+  train_rand_gen(loader, lr, wd, max_epochs, model_conf_dict, save_interval, save_dir)
+}
+class "GraphCL" as dig.sslgraph.method.contrastive.model.graphcl.GraphCL {
+  train(encoders, data_loader, optimizer, epochs, per_epoch_out)
+}
+class "GraphConv" as dig.ggraph.method.GraphEBM.energy_func.GraphConv {
+  add_self : bool
+  in_ch
+  linear_edge : Linear
+  linear_node : Linear
+  num_edge_type
+  out_ch
+  forward(adj, h)
+}
+class "GraphDF" as dig.ggraph.method.GraphDF.graphdf.GraphDF {
+  model : NoneType
+  get_model(task, model_conf_dict, checkpoint_path)
+  load_pretrain_model(path)
+  run_const_prop_opt(dataset, model_conf_dict, checkpoint_path, repeat_time, min_optim_time, num_max_node, temperature, atomic_num_list)
+  run_const_prop_opt_one_mol(adj, x, org_smile, mol_size, bfs_perm_origin, max_size_rl, temperature, atom_list)
+  run_prop_opt(model_conf_dict, checkpoint_path, n_mols, num_min_node, num_max_node, temperature, atomic_num_list)
+  run_rand_gen(model_conf_dict, checkpoint_path, n_mols, num_min_node, num_max_node, temperature, atomic_num_list)
+  train_const_prop_opt(loader, lr, wd, max_iters, warm_up, model_conf_dict, pretrain_path, save_interval, save_dir)
+  train_prop_opt(lr, wd, max_iters, warm_up, model_conf_dict, pretrain_path, save_interval, save_dir)
+  train_rand_gen(loader, lr, wd, max_epochs, model_conf_dict, save_interval, save_dir)
+}
+class "GraphEBM" as dig.ggraph.method.GraphEBM.graphebm.GraphEBM {
+  device : NoneType
+  energy_function : NoneType
+  n_atom
+  n_atom_type
+  n_edge_type
+  run_comp_gen(checkpoint_path_qed, checkpoint_path_plogp, n_samples, c, ld_step, ld_noise, ld_step_size, clamp, atomic_num_list)
+  run_const_prop_opt(checkpoint_path, initialization_loader, c, ld_step, ld_noise, ld_step_size, clamp, atomic_num_list, train_smiles)
+  run_prop_opt(checkpoint_path, initialization_loader, c, ld_step, ld_noise, ld_step_size, clamp, atomic_num_list, train_smiles)
+  run_rand_gen(checkpoint_path, n_samples, c, ld_step, ld_noise, ld_step_size, clamp, atomic_num_list)
+  train_goal_directed(loader, lr, wd, max_epochs, c, ld_step, ld_noise, ld_step_size, clamp, alpha, save_interval, save_dir)
+  train_rand_gen(loader, lr, wd, max_epochs, c, ld_step, ld_noise, ld_step_size, clamp, alpha, save_interval, save_dir)
+}
+class "GraphFlowModel" as dig.ggraph.method.GraphDF.model.graphflow.GraphFlowModel {
+  bond_dim
+  dp
+  edge_base_log_probs : Parameter
+  edge_unroll
+  flow_core : DataParallel
+  flow_core_edge_masks : Parameter
+  latent_edge_length
+  latent_node_length
+  latent_step
+  max_size
+  node_base_log_probs : Parameter
+  node_dim
+  dis_log_prob(z)
+  forward(inp_node_features, inp_adj_features)
+  generate(atom_list, temperature, min_atoms, max_atoms)
+  initialize_masks(max_node_unroll, max_edge_unroll)
+}
+class "GraphFlowModel" as dig.ggraph.method.GraphAF.model.graphflow.GraphFlowModel {
+  bond_dim
+  constant_pi : Parameter
+  deq_coeff
+  dp
+  edge_unroll
+  flow_core : DataParallel
+  flow_core_edge_masks : Parameter
+  latent_edge_length
+  latent_node_length
+  latent_step
+  max_size
+  node_dim
+  prior_ln_var : Parameter
+  use_df
+  dis_log_prob(z)
+  forward(inp_node_features, inp_adj_features)
+  generate(atom_list, temperature, min_atoms, max_atoms)
+  initialize_masks(max_node_unroll, max_edge_unroll)
+  log_prob(z, logdet)
+}
+class "GraphFlowModel_con_rl" as dig.ggraph.method.GraphDF.model.graphflow_con_rl.GraphFlowModel_con_rl {
+  bond_dim
+  conf_rl
+  dp
+  edge_base_log_probs : Parameter
+  edge_base_log_probs_old : Parameter
+  edge_unroll
+  flow_core : DataParallel
+  flow_core_edge_masks : Parameter
+  flow_core_old : DataParallel
+  latent_edge_length
+  latent_node_length
+  latent_step
+  max_size
+  node_base_log_probs : Parameter
+  node_base_log_probs_old : Parameter
+  node_dim
+  dis_log_prob(z)
+  initialize_masks(max_node_unroll, max_edge_unroll)
+  reinforce_constrained_optim_one_mol(x, adj, mol_size, raw_smile, bfs_perm_origin, atom_list, temperature, max_size_rl)
+  reinforce_forward_constrained_optim(mol_xs, mol_adjs, mol_sizes, raw_smiles, bfs_perm_origin, in_baseline, cur_iter)
+}
+class "GraphFlowModel_con_rl" as dig.ggraph.method.GraphAF.model.graphflow_con_rl.GraphFlowModel_con_rl {
+  bond_dim
+  conf_rl
+  constant_pi : Parameter
+  deq_coeff
+  dp
+  edge_unroll
+  flow_core : DataParallel
+  flow_core_edge_masks : Parameter
+  flow_core_old : DataParallel
+  latent_edge_length
+  latent_node_length
+  latent_step
+  max_size
+  node_dim
+  prior_ln_var : Parameter
+  dis_log_prob(z)
+  initialize_masks(max_node_unroll, max_edge_unroll)
+  reinforce_constrained_optim_one_mol(x, adj, mol_size, raw_smile, bfs_perm_origin, atom_list, temperature, max_size_rl)
+  reinforce_forward_constrained_optim(mol_xs, mol_adjs, mol_sizes, raw_smiles, bfs_perm_origin, in_baseline, cur_iter)
+}
+class "GraphFlowModel_rl" as dig.ggraph.method.GraphDF.model.graphflow_rl.GraphFlowModel_rl {
+  bond_dim
+  conf_rl
+  dp
+  edge_base_log_probs : Parameter
+  edge_base_log_probs_old : Parameter
+  edge_unroll
+  flow_core : DataParallel
+  flow_core_edge_masks : Parameter
+  flow_core_old : DataParallel
+  latent_edge_length
+  latent_node_length
+  latent_step
+  max_size
+  node_base_log_probs : Parameter
+  node_base_log_probs_old : Parameter
+  node_dim
+  dis_log_prob(z)
+  initialize_masks(max_node_unroll, max_edge_unroll)
+  reinforce_forward_optim(in_baseline, cur_iter)
+  reinforce_optim_one_mol(atom_list, temperature, max_size_rl)
+}
+class "GraphFlowModel_rl" as dig.ggraph.method.GraphAF.model.graphflow_rl.GraphFlowModel_rl {
+  bond_dim
+  conf_rl
+  constant_pi : Parameter
+  deq_coeff
+  dp
+  edge_unroll
+  flow_core : DataParallel
+  flow_core_edge_masks : Parameter
+  flow_core_old : DataParallel
+  latent_edge_length
+  latent_node_length
+  latent_step
+  max_size
+  node_dim
+  prior_ln_var : Parameter
+  dis_log_prob(z)
+  initialize_masks(max_node_unroll, max_edge_unroll)
+  log_prob(z, logdet, deq_logp, deq_logdet)
+  reinforce_forward_optim(in_baseline, cur_iter)
+  reinforce_optim_one_mol(atom_list, temperature, max_size_rl)
+}
+class "GraphGRU" as dig.ggraph.method.JTVAE.fast_jtnn.jtnn_enc.GraphGRU {
+  U_r : Linear
+  W_h : Linear
+  W_r : Linear
+  W_z : Linear
+  depth
+  hidden_size
+  input_size
+  forward(h, x, mess_graph)
+}
+class "GraphLayerGradCam" as dig.xgraph.method.gradcam.GraphLayerGradCam {
+  attribute(inputs: Union[Tensor, Tuple[Tensor, ...]], target: TargetType, additional_forward_args: Any, attribute_to_layer_input: bool, relu_attributions: bool) -> Union[Tensor, Tuple[Tensor, ...]]
+}
+class "GraphSemisupervised" as dig.sslgraph.evaluation.eval_graph.GraphSemisupervised {
+  batch_size : int
+  dataset
+  dataset_pretrain
+  device : NoneType
+  epoch_select : str
+  f_epoch : int
+  f_lr : float
+  f_optim : str
+  f_weight_decay : int
+  label_rate : int
+  loss
+  metric : str
+  n_folds : int
+  out_dim
+  p_epoch : int
+  p_lr : float
+  p_optim : str
+  p_weight_decay : int
+  eval_acc(model, loader, eval_mode)
+  eval_loss(model, loader, eval_mode)
+  eval_metric(model, loader, eval_mode)
+  evaluate(learning_model, encoder, pred_head, fold_seed)
+  finetune(model, optimizer, loader)
+  get_optim(optim)
+  grid_search(learning_model, encoder, pred_head, fold_seed, p_lr_lst, p_epoch_lst)
+  setup_train_config(batch_size, p_optim, p_lr, p_weight_decay, p_epoch, f_optim, f_lr, f_weight_decay, f_epoch)
+}
+class "GraphSequential" as dig.xgraph.models.models.GraphSequential {
+  forward() -> Tensor
+}
+class "GraphUnsupervised" as dig.sslgraph.evaluation.eval_graph.GraphUnsupervised {
+  batch_size : int
+  classifier : str
+  dataset
+  device : NoneType
+  epoch_select : str
+  log_interval : int
+  metric : str
+  n_folds : int
+  out_dim
+  p_epoch : int
+  p_lr : float
+  p_optim : str
+  p_weight_decay : int
+  search : bool
+  evaluate(learning_model, encoder, fold_seed)
+  get_clf()
+  get_embed(model, loader)
+  get_optim(optim)
+  grid_search(learning_model, encoder, fold_seed, p_lr_lst, p_epoch_lst)
+  log_reg(train_embs, train_lbls, test_embs, test_lbls)
+  setup_train_config(batch_size, p_optim, p_lr, p_weight_decay, p_epoch, svc_search)
+  svc_clf(train_embs, train_lbls, test_embs, test_lbls)
+}
+class "IdenticalPool" as dig.xgraph.models.models.IdenticalPool {
+  forward(x, batch)
+}
+class "InfoG_enc" as dig.sslgraph.method.contrastive.model.infograph.InfoG_enc {
+  encoder
+  fc : Linear
+  forward(data)
+}
+class "InfoGraph" as dig.sslgraph.method.contrastive.model.infograph.InfoGraph {
+  train(encoders, data_loader, optimizer, epochs, per_epoch_out)
+}
+class "JTMPN" as dig.ggraph.method.JTVAE.fast_jtnn.jtmpn.JTMPN {
+  W_h : Linear
+  W_i : Linear
+  W_o : Linear
+  depth
+  hidden_size
+  forward(fatoms, fbonds, agraph, bgraph, scope, tree_message)
+  tensorize(cand_batch, mess_dict)
+}
+class "JTMPNBO" as dig.ggraph.method.JTVAE.fast_jtnn.jtmpn_bo.JTMPNBO {
+  W_h : Linear
+  W_i : Linear
+  W_o : Linear
+  depth
+  hidden_size
+  forward(cand_batch, tree_mess)
+}
+class "JTNNDecoder" as dig.ggraph.method.JTVAE.fast_jtnn.jtnn_dec.JTNNDecoder {
+  U : Linear
+  U_i : Linear
+  U_o : Linear
+  U_r : Linear
+  W : Linear
+  W_h : Linear
+  W_o : Linear
+  W_r : Linear
+  W_z : Linear
+  embedding : NoneType, Embedding
+  hidden_size
+  pred_loss : CrossEntropyLoss
+  stop_loss : BCEWithLogitsLoss
+  vocab
+  vocab_size
+  aggregate(hiddens, contexts, x_tree_vecs, mode)
+  decode(x_tree_vecs, prob_decode)
+  forward(mol_batch, x_tree_vecs)
+}
+class "JTNNEncoder" as dig.ggraph.method.JTVAE.fast_jtnn.jtnn_enc.JTNNEncoder {
+  GRU
+  depth
+  embedding
+  hidden_size
+  outputNN : Sequential
+  forward(fnode, fmess, node_graph, mess_graph, scope)
+  tensorize(tree_batch)
+  tensorize_nodes(node_batch, scope)
+}
+class "JTNNEncoderBO" as dig.ggraph.method.JTVAE.fast_jtnn.jtnn_enc_bo.JTNNEncoderBO {
+  U_r : Linear
+  W : Linear
+  W_h : Linear
+  W_r : Linear
+  W_z : Linear
+  embedding : Embedding, NoneType
+  hidden_size
+  vocab
+  vocab_size
+  forward(root_batch)
+}
+class "JTNNVAE" as dig.ggraph.method.JTVAE.fast_jtnn.jtnn_vae.JTNNVAE {
+  A_assm : Linear
+  G_mean : Linear
+  G_var : Linear
+  T_mean : Linear
+  T_var : Linear
+  assm_loss : CrossEntropyLoss
+  decoder
+  hidden_size
+  jtmpn
+  jtnn
+  latent_size
+  mpn
+  vocab
+  assm(mol_batch, jtmpn_holder, x_mol_vecs, x_tree_mess)
+  decode(x_tree_vecs, x_mol_vecs, prob_decode)
+  dfs_assemble(y_tree_mess, x_mol_vecs, all_nodes, cur_mol, global_amap, fa_amap, cur_node, fa_node, prob_decode, check_aroma)
+  encode(jtenc_holder, mpn_holder)
+  encode_from_smiles(smiles_list)
+  encode_latent(jtenc_holder, mpn_holder)
+  forward(x_batch, beta)
+  rsample(z_vecs, W_mean, W_var)
+  sample_prior(prob_decode)
+}
+class "JTNNVAEBO" as dig.ggraph.method.JTVAE.fast_jtnn.jtnn_vae_bo.JTNNVAEBO {
+  G_mean : Linear
+  G_var : Linear
+  T_mean : Linear
+  T_var : Linear
+  assm_loss : CrossEntropyLoss
+  decoder
+  depth
+  embedding : Embedding
+  hidden_size
+  jtmpn
+  jtnn
+  latent_size
+  mpn
+  stereo_loss : CrossEntropyLoss
+  use_stereo : bool
+  vocab
+  assm(mol_batch, mol_vec, tree_mess)
+  decode(tree_vec, mol_vec, prob_decode)
+  dfs_assemble(tree_mess, mol_vec, all_nodes, cur_mol, global_amap, fa_amap, cur_node, fa_node, prob_decode)
+  encode(mol_batch)
+  encode_latent_mean(smiles_list)
+  forward(mol_batch, beta)
+  recon_eval(smiles)
+  reconstruct(smiles, prob_decode)
+  sample_eval()
+  sample_prior(prob_decode)
+  stereo(mol_batch, mol_vec)
+}
+class "JTPropVAE" as dig.ggraph.method.JTVAE.fast_jtnn.jtprop_vae.JTPropVAE {
+  G_mean : Linear
+  G_var : Linear
+  T_mean : Linear
+  T_var : Linear
+  assm_loss : CrossEntropyLoss
+  decoder
+  depth
+  embedding : Embedding
+  hidden_size
+  jtmpn
+  jtnn
+  latent_size
+  mpn
+  propNN : Sequential
+  prop_loss : MSELoss
+  stereo_loss : CrossEntropyLoss
+  vocab
+  assm(mol_batch, mol_vec, tree_mess)
+  decode(tree_vec, mol_vec, prob_decode)
+  dfs_assemble(tree_mess, mol_vec, all_nodes, cur_mol, global_amap, fa_amap, cur_node, fa_node, prob_decode)
+  encode(mol_batch)
+  encode_latent_mean(smiles_list)
+  forward(mol_batch, beta)
+  optimize(smiles, sim_cutoff, lr, num_iter)
+  reconstruct(smiles, prob_decode)
+  sample_prior(prob_decode)
+  stereo(mol_batch, mol_vec)
+}
+class "JTVAE" as dig.ggraph.method.JTVAE.jtvae.JTVAE {
+  model : NoneType
+  prop_vae
+  vae
+  vocab : list
+  build_vocabulary(list_smiles)
+  get_model(task, config_dict)
+  preprocess(list_smiles)
+  run_cons_optim(list_smiles, sim_cutoff)
+  run_rand_gen(num_samples)
+  train_cons_optim(loader, batch_size, num_epochs, hidden_size, latent_size, depth, beta, lr)
+  train_rand_gen(loader, load_epoch, lr, anneal_rate, clip_norm, num_epochs, beta, max_beta, step_beta, anneal_iter, kl_anneal_iter, print_iter, save_iter)
+}
+class "LayerDeepLift" as dig.xgraph.models.ext.deeplift.layer_deep_lift.LayerDeepLift {
+  model : Module
+  attribute(inputs: Union[Tensor, Tuple[Tensor, ...]], baselines: BaselineType, target: TargetType, additional_forward_args: Any, return_convergence_delta: Literal[False], attribute_to_layer_input: bool, custom_attribution_func: Union[None, Callable[..., Tuple[Tensor, ...]]]) -> Union[Tensor, Tuple[Tensor, ...]]
+}
+class "LayerDeepLiftShap" as dig.xgraph.models.ext.deeplift.layer_deep_lift.LayerDeepLiftShap {
+  attribute(inputs: Union[Tensor, Tuple[Tensor, ...]], baselines: Union[Tensor, Tuple[Tensor, ...], Callable[..., Union[Tensor, Tuple[Tensor, ...]]]], target: TargetType, additional_forward_args: Any, return_convergence_delta: Literal[False], attribute_to_layer_input: bool, custom_attribution_func: Union[None, Callable[..., Tuple[Tensor, ...]]]) -> Union[Tensor, Tuple[Tensor, ...]]
+}
+class "Linear" as dig.threedgraph.method.comenet.comenet.Linear {
+  bias : Parameter
+  bias_initializer : str
+  in_channels
+  out_channels
+  weight : Parameter
+  weight_initializer : str
+  forward(x)
+  reset_parameters()
+}
+class "LogReg" as dig.sslgraph.evaluation.eval_graph.LogReg {
+  fc : Linear
+  forward(seq)
+  weights_init(m)
+}
+class "LogReg" as dig.sslgraph.evaluation.eval_node.LogReg {
+  fc : Linear
+  sigm : Sigmoid
+  forward(seq)
+  weights_init(m)
+}
+class "MCTS" as dig.xgraph.method.subgraphx.MCTS {
+  MCTSNodeClass : partial
+  X : Tensor
+  c_puct : float
+  data : Data
+  device : str
+  edge_index : Tensor
+  expand_atoms : int
+  graph : DiGraph, Graph
+  high2low : bool
+  min_atoms : int
+  n_rollout : int
+  new_node_idx : NoneType
+  num_hops : int
+  num_nodes
+  ori_graph : Graph, DiGraph
+  ori_node_idx : NoneType
+  root
+  root_coalition
+  score_func : Optional[Callable]
+  state_map : dict
+  subset
+  mcts(verbose)
+  mcts_rollout(tree_node)
+  set_score_func(score_func)
+}
+class "MCTSNode" as dig.xgraph.method.subgraphx.MCTSNode {
+  N : int
+  P : float
+  W : float
+  c_puct : float
+  children : list
+  coalition : Optional[list]
+  data : Optional[Data]
+  device : str
+  info
+  ori_graph : Graph
+  Q()
+  U(n)
+  load_info(info_dict)
+}
+class "MD17" as dig.threedgraph.dataset.PygMD17.MD17 {
+  data
+  folder
+  name : str
+  processed_file_names
+  raw_file_names
+  slices
+  url : str
+  download()
+  get_idx_split(data_size, train_size, valid_size, seed)
+  process()
+}
+class "MH_ATT" as dig.ggraph3D.method.G_SphereNet.model.att.MH_ATT {
+  d_k : int
+  k_proj : Linear
+  n_att_heads : int
+  out_proj : Linear
+  q_proj : Linear
+  v_proj : Linear
+  forward(query, key, value, query_batch, key_value_batch)
+}
+class "MLP" as dig.ggraph3D.method.G_SphereNet.model.net_utils.MLP {
+  layers : Sequential
+  forward(x)
+}
+class "MOSES" as dig.ggraph.dataset.ggraph_dataset.MOSES {
+}
+class "MPN" as dig.ggraph.method.JTVAE.fast_jtnn.mpn.MPN {
+  W_h : Linear
+  W_i : Linear
+  W_o : Linear
+  depth
+  hidden_size
+  forward(fatoms, fbonds, agraph, bgraph, scope)
+  tensorize(mol_batch)
+}
+class "MVGRL" as dig.sslgraph.method.contrastive.model.mvgrl.MVGRL {
+  views_fn : list
+  train(encoders, data_loader, optimizer, epochs, per_epoch_out)
+}
+class "MVGRL_enc" as dig.sslgraph.method.contrastive.model.mvgrl.MVGRL_enc {
+  encoder_0
+  encoder_1
+  graph_level : bool
+  node_level : bool
+  proj
+  proj_n
+  views_fn
+  forward(data)
+}
+class "MarginalSubgraphDataset" as dig.xgraph.dataset.utils_dataset.MarginalSubgraphDataset {
+  X
+  device
+  edge_index
+  exclude_mask
+  include_mask
+  label
+  num_nodes
+  subgraph_build_func
+}
+class "MarginalSubgraphDataset" as dig.xgraph.method.shapley.MarginalSubgraphDataset {
+  X
+  device
+  edge_index
+  exclude_mask
+  include_mask
+  label
+  num_nodes
+  subgraph_build_func
+}
+class "MaskedGraphAF" as dig.ggraph.method.GraphAF.model.graphaf.MaskedGraphAF {
+  batchNorm : BatchNorm1d
+  edge_st_net : ModuleList
+  emb_size : int
+  graph_size : int
+  index_select_edge : Parameter
+  mask_edge : Parameter
+  mask_node : Parameter
+  node_st_net : ModuleList
+  num_edge_type : int
+  num_flow_layer : int
+  num_node_type : int
+  repeat_num
+  rgcn
+  st_net_fn_dict : dict
+  st_type : str
+  forward(x, adj, x_deq, adj_deq)
+  forward_rl_edge(x, adj, x_cont, index)
+  forward_rl_node(x, adj, x_cont)
+  reverse(x, adj, latent, mode, edge_index)
+}
+class "MolTree" as dig.ggraph.method.JTVAE.fast_jtnn.mol_tree.MolTree {
+  mol : NoneType
+  nodes : list
+  smiles
+  smiles2D
+  smiles3D
+  stereo_cands
+  assemble()
+  recover()
+  size()
+}
+class "MolTreeDataset" as dig.ggraph.method.JTVAE.fast_jtnn.datautils.MolTreeDataset {
+  assm : bool
+  data
+  vocab
+}
+class "MolTreeFolder" as dig.ggraph.method.JTVAE.fast_jtnn.datautils.MolTreeFolder {
+  assm : bool
+  batch_size
+  data_files
+  num_workers : int
+  preprocessed_data
+  shuffle : bool
+  vocab
+}
+class "MolTreeNode" as dig.ggraph.method.JTVAE.fast_jtnn.mol_tree.MolTreeNode {
+  cands : list
+  clique
+  idx : int
+  label
+  label_mol : NoneType
+  mol : NoneType
+  neighbors : list
+  smiles
+  wid : NoneType
+  add_neighbor(nei_node)
+  assemble()
+  recover(original_mol)
+}
+class "MoleculeDataset" as dig.ggraph.method.JTVAE.fast_jtnn.datautils.MoleculeDataset {
+  data
+}
+class "MoleculeDataset" as dig.xgraph.dataset.mol_dataset.MoleculeDataset {
+  data
+  mutag_url : str
+  name
+  names : dict
+  processed_dir
+  processed_file_names
+  raw_dir
+  raw_file_names
+  slices
+  url : str
+  download()
+  process()
+}
+class "NodeAttrMask" as dig.sslgraph.method.contrastive.views_fn.feature.NodeAttrMask {
+  mask_mean : float
+  mask_ratio : float
+  mask_std : float
+  mode : str
+  return_mask : bool
+  do_trans(data)
+  views_fn(data)
+}
+class "NodeMVGRL" as dig.sslgraph.method.contrastive.model.mvgrl.NodeMVGRL {
+  alpha : float
+  mode : str
+  t : int
+  train(encoders, data_loader, optimizer, epochs, per_epoch_out)
+}
+class "NodeUnsupervised" as dig.sslgraph.evaluation.eval_node.NodeUnsupervised {
+  classifier : str
+  comp_embed_on : str
+  device : NoneType
+  full_dataset
+  log_interval : int
+  logreg_wd : int
+  metric : str
+  num_classes
+  p_epoch : int
+  p_lr : float
+  p_optim : str
+  p_weight_decay : int
+  test_mask : NoneType
+  train_mask : NoneType
+  val_mask : NoneType
+  evaluate(learning_model, encoder)
+  evaluate_multisplits(learning_model, encoder, split_masks)
+  get_clf()
+  get_embed(model, loader)
+  get_optim(optim)
+  grid_search(learning_model, encoder, p_lr_lst, p_epoch_lst)
+  log_reg(train_embs, train_lbls, test_embs, test_lbls)
+  setup_train_config(p_optim, p_lr, p_weight_decay, p_epoch, logreg_wd, comp_embed_on)
+  svc_clf(train_embs, train_lbls, test_embs, test_lbls)
+}
+class "PGExplainer" as dig.xgraph.method.pgexplainer.PGExplainer {
+  coff_ent : float
+  coff_size : float
+  device
+  edge_mask : NoneType
+  elayers : ModuleList
+  epochs : int
+  explain_graph : bool
+  in_channels : int
+  init_bias : float
+  lr : float
+  model
+  num_hops : int, NoneType
+  sample_bias : float
+  sparse_mask_values
+  t0 : float
+  t1 : float
+  concrete_sample(log_alpha: Tensor, beta: float, training: bool)
+  explain(x: Tensor, edge_index: Tensor, embed: Tensor, tmp: float, training: bool) -> Tuple[float, Tensor]
+  forward(x: Tensor, edge_index: Tensor) -> Tuple[None, List, List[Dict]]
+  get_subgraph(node_idx: int, x: Tensor, edge_index: Tensor, y: Optional[Tensor]) -> Tuple[Tensor, Tensor, Tensor, List, Dict]
+  train_explanation_network(dataset)
+  update_num_hops(num_hops: int)
+  visualization(data: Data, edge_mask: Tensor, top_k: int, plot_utils: PlotUtils, words: Optional[list], node_idx: int, vis_name: Optional[str])
+}
+class "PairTreeDataset" as dig.ggraph.method.JTVAE.fast_jtnn.datautils.PairTreeDataset {
+  data
+  vocab
+  y_assm
+}
+class "PairTreeFolder" as dig.ggraph.method.JTVAE.fast_jtnn.datautils.PairTreeFolder {
+  batch_size
+  data_files
+  data_folder
+  num_workers : int
+  shuffle : bool
+  vocab
+  y_assm : bool
+}
+class "PlotUtils" as dig.xgraph.method.pgexplainer.PlotUtils {
+  dataset_name
+  is_show : bool
+  get_topk_edges_subgraph(edge_index, edge_mask, top_k, un_directed)
+  plot_ba2motifs(graph, nodelist, edgelist, title_sentence, figname)
+  plot_bashapes(graph, nodelist, y, node_idx, edgelist, title_sentence, figname)
+  plot_molecule(graph, nodelist, x, edgelist, title_sentence, figname)
+  plot_sentence(graph, nodelist, words, edgelist, title_sentence, figname)
+  plot_soft_edge_mask(graph, edge_mask, top_k, un_directed, figname, title_sentence)
+  plot_subgraph(graph, nodelist, colors, labels, edge_color, edgelist, subgraph_edge_color, title_sentence, figname)
+  plot_subgraph_with_nodes(graph, nodelist, node_idx, colors, labels, edge_color, edgelist, subgraph_edge_color, title_sentence, figname)
+}
+class "PlotUtils" as dig.xgraph.method.subgraphx.PlotUtils {
+  dataset_name
+  is_show : bool
+  plot(graph, nodelist, figname, title_sentence)
+  plot_ba2motifs(graph, nodelist, edgelist, title_sentence, figname)
+  plot_bashapes(graph, nodelist, y, node_idx, edgelist, title_sentence, figname)
+  plot_molecule(graph, nodelist, x, edgelist, title_sentence, figname)
+  plot_sentence(graph, nodelist, words, edgelist, title_sentence, figname)
+  plot_subgraph(graph, nodelist, colors: Union[None, str, List[str]], labels, edge_color, edgelist, subgraph_edge_color, title_sentence, figname)
+  plot_subgraph_with_nodes(graph, nodelist, node_idx, colors, labels, edge_color, edgelist, subgraph_edge_color, title_sentence, figname)
+}
+class "PredictionModel" as dig.sslgraph.evaluation.eval_graph.PredictionModel {
+  encoder
+  pred_head : Linear
+  forward(data)
+}
+class "ProjHead" as dig.sslgraph.method.contrastive.model.mvgrl.ProjHead {
+  ffn : Sequential
+  linear_shortcut : Linear
+  forward(x)
+}
+class "ProjHead" as dig.sslgraph.method.contrastive.model.infograph.ProjHead {
+  block : Sequential
+  linear_shortcut : Linear
+  forward(x)
+}
+class "PropDataset" as dig.ggraph.method.JTVAE.fast_jtnn.datautils.PropDataset {
+  data
+  prop_data
+}
+class "PropOptEvaluator" as dig.ggraph.evaluation.metric.PropOptEvaluator {
+  prop_name : str
+  eval(input_dict)
+}
+class "PropOptEvaluator" as dig.ggraph3D.evaluation.metric.PropOptEvaluator {
+  good_threshold : float
+  prop_name : str
+  eval(mol_dicts)
+}
+class "PygDataset" as dig.ggraph.dataset.PygDataset.PygDataset {
+  all_smiles : list
+  atom_list : set, dict, list, tuple
+  available_prop
+  data
+  name
+  num_max_node : int
+  one_shot : bool
+  processed_dir
+  processed_file_names
+  processed_filename : str
+  prop_name : str
+  raw_dir
+  raw_file_names
+  root
+  slices : NoneType, defaultdict
+  smile_col
+  url
+  use_aug : bool
+  download()
+  get(idx)
+  get_split_idx()
+  one_shot_process()
+  pre_process()
+  process()
+}
+class "QM9" as dig.ggraph.dataset.ggraph_dataset.QM9 {
+}
+class "QM93D" as dig.threedgraph.dataset.PygQM93D.QM93D {
+  data
+  folder
+  processed_file_names
+  raw_file_names
+  slices
+  url : str
+  download()
+  get_idx_split(data_size, train_size, valid_size, seed)
+  process()
+}
+class "QM93DGEN" as dig.ggraph3D.dataset.ggraph3D_dataset.QM93DGEN {
+  atom_type_list : list
+  con_mat_list : list
+  position_list : list
+  processed_dir
+  processed_file_names
+  raw_dir
+  raw_file_names
+  raw_url : str
+  root : str
+  split_urls : list
+  download()
+  get(idx)
+  get_idx_split(task)
+  len()
+  process()
+}
+class "RGCN" as dig.ggraph.method.GraphDF.model.rgcn.RGCN {
+  dropout : float
+  edge_dim : int
+  emb : Linear
+  gc1
+  gc2 : ModuleList
+  gc3
+  nfeat
+  nhid : int
+  normalization : bool
+  nout : int
+  num_layers : int
+  forward(x, adj)
+}
+class "RGCN" as dig.ggraph.method.GraphAF.model.rgcn.RGCN {
+  dropout : float
+  edge_dim : int
+  emb : Linear
+  gc1
+  gc2 : ModuleList
+  gc3
+  nfeat
+  nhid : int
+  normalization : bool
+  nout : int
+  num_layers : int
+  forward(x, adj)
+}
+class "RWSample" as dig.sslgraph.method.contrastive.views_fn.sample.RWSample {
+  add_self_loop : bool
+  ratio : float
+  do_trans(data)
+  views_fn(data)
+}
+class "RandGenEvaluator" as dig.ggraph.evaluation.metric.RandGenEvaluator {
+  eval(input_dict)
+}
+class "RandGenEvaluator" as dig.ggraph3D.evaluation.metric.RandGenEvaluator {
+  eval_bond_mmd(input_dict)
+  eval_validity(mol_dicts)
+}
+class "RandomView" as dig.sslgraph.method.contrastive.views_fn.combination.RandomView {
+  candidates
+  views_fn(batch_data)
+}
+class "ReadOut" as dig.xgraph.models.utils.ReadOut {
+  divided_graph(x, batch_index)
+  forward(x: torch.tensor, batch_index) -> torch.tensor
+}
+class "RelationGraphConvolution" as dig.ggraph.method.GraphDF.model.rgcn.RelationGraphConvolution {
+  act : ReLU, NoneType
+  aggregate : str
+  bias : Parameter
+  dropout : float
+  edge_dim : int
+  in_features
+  out_features
+  weight : Parameter
+  forward(x, adj)
+  reset_parameters()
+}
+class "RelationGraphConvolution" as dig.ggraph.method.GraphAF.model.rgcn.RelationGraphConvolution {
+  act : ReLU, NoneType
+  aggregate : str
+  bias : Parameter
+  dropout : float
+  edge_dim : int
+  in_features
+  out_features
+  weight : Parameter
+  forward(x, adj)
+  reset_parameters()
+}
+class "ResGCN" as dig.sslgraph.utils.encoders.ResGCN {
+  bn : bool
+  bn1_xg : BatchNorm1d
+  bn2_xg : BatchNorm1d
+  bn_feat : BatchNorm1d
+  bn_hidden : BatchNorm1d
+  bns_conv : ModuleList
+  bns_fc : ModuleList
+  collapse : bool
+  conv_feat
+  conv_residual : bool
+  convs : ModuleList
+  dropout : int
+  fc_residual : bool
+  gating : NoneType, Sequential
+  global_pool
+  lin1_xg : Linear
+  lin2_xg : Linear
+  lins : ModuleList
+  use_xg : bool
+  forward(data)
+}
+class "ResGCNConv" as dig.sslgraph.utils.encoders.ResGCNConv {
+  bias : Parameter
+  cached : bool
+  cached_result : NoneType, tuple
+  edge_norm : bool
+  gfn : bool
+  improved : bool
+  in_channels
+  out_channels
+  weight : Parameter
+  forward(x, edge_index, edge_weight)
+  message(x_j, norm)
+  norm(edge_index, num_nodes, edge_weight, improved, dtype)
+  update(aggr_out)
+  weights_init()
+}
+class "Rescale" as dig.ggraph.method.GraphDF.model.st_net.Rescale {
+  weight : Parameter
+  forward(x)
+}
+class "Rescale" as dig.ggraph.method.GraphAF.model.st_net.Rescale {
+  weight : Parameter
+  forward(x)
+}
+class "Rescale" as dig.ggraph3D.method.G_SphereNet.model.net_utils.Rescale {
+  weight : Parameter
+  forward(x)
+}
+class "Rescale_channel" as dig.ggraph.method.GraphDF.model.st_net.Rescale_channel {
+  num_channels
+  weight : Parameter
+  forward(x)
+}
+class "Rescale_channel" as dig.ggraph.method.GraphAF.model.st_net.Rescale_channel {
+  num_channels
+  weight : Parameter
+  forward(x)
+}
+class "ResidualLayer" as dig.threedgraph.method.spherenet.spherenet.ResidualLayer {
+  act
+  lin1 : Linear
+  lin2 : Linear
+  forward(x)
+  reset_parameters()
+}
+class "ResidualLayer" as dig.threedgraph.method.dimenetpp.dimenetpp.ResidualLayer {
+  act
+  lin1 : Linear
+  lin2 : Linear
+  forward(x)
+  reset_parameters()
+}
+class "ResidualLayer" as dig.ggraph3D.method.G_SphereNet.model.spherenet.ResidualLayer {
+  act
+  lin1 : Linear
+  lin2 : Linear
+  forward(x)
+  reset_parameters()
+}
+class "ST_Dis" as dig.ggraph.method.GraphDF.model.st_net.ST_Dis {
+  bias : bool
+  hid_dim : int
+  input_dim
+  linear1 : Linear
+  linear2 : Linear
+  output_dim
+  tanh : Tanh
+  temperature : float
+  forward(graph_embed)
+  reset_parameters()
+}
+class "ST_Net_Exp" as dig.ggraph.method.GraphDF.model.st_net.ST_Net_Exp {
+  apply_batch_norm : bool
+  bias : bool
+  bn_before : BatchNorm1d
+  hid_dim : int
+  input_dim
+  linear1 : Linear
+  linear2 : Linear
+  num_layers : int
+  output_dim
+  rescale1
+  scale_weight_norm : bool
+  sigmoid_shift : float
+  tanh : Tanh
+  forward(x)
+  reset_parameters()
+}
+class "ST_Net_Exp" as dig.ggraph.method.GraphAF.model.st_net.ST_Net_Exp {
+  apply_batch_norm : bool
+  bias : bool
+  bn_before : BatchNorm1d
+  hid_dim : int
+  input_dim
+  linear1 : Linear
+  linear2 : Linear
+  num_layers : int
+  output_dim
+  rescale1
+  scale_weight_norm : bool
+  sigmoid_shift : float
+  tanh : Tanh
+  forward(x)
+  reset_parameters()
+}
+class "ST_Net_Exp" as dig.ggraph3D.method.G_SphereNet.model.net_utils.ST_Net_Exp {
+  bias : bool
+  hid_dim : int
+  input_dim
+  linear1 : Linear
+  linear2 : Linear
+  num_layers : int
+  output_dim
+  rescale1
+  tanh : Tanh
+  forward(x)
+  reset_parameters()
+}
+class "ST_Net_Sigmoid" as dig.ggraph.method.GraphDF.model.st_net.ST_Net_Sigmoid {
+  apply_batch_norm : bool
+  bias : bool
+  bn_before : BatchNorm1d
+  hid_dim : int
+  input_dim
+  linear1 : Linear
+  linear2 : Linear
+  num_layers : int
+  output_dim
+  rescale1
+  rescale2
+  scale_weight_norm : bool
+  sigmoid : Sigmoid
+  sigmoid_shift : float
+  tanh : Tanh
+  forward(x)
+  reset_parameters()
+}
+class "ST_Net_Sigmoid" as dig.ggraph.method.GraphAF.model.st_net.ST_Net_Sigmoid {
+  apply_batch_norm : bool
+  bias : bool
+  bn_before : BatchNorm1d
+  hid_dim : int
+  input_dim
+  linear1 : Linear
+  linear2 : Linear
+  num_layers : int
+  output_dim
+  rescale1
+  rescale2
+  scale_weight_norm : bool
+  sigmoid : Sigmoid
+  sigmoid_shift : float
+  tanh : Tanh
+  forward(x)
+  reset_parameters()
+}
+class "ST_Net_Softplus" as dig.ggraph.method.GraphDF.model.st_net.ST_Net_Softplus {
+  apply_batch_norm : bool
+  bias : bool
+  bn_before : BatchNorm1d
+  hid_dim : int
+  input_dim
+  linear1 : Linear
+  linear2 : Linear
+  linear3 : Linear
+  num_layers : int
+  output_dim
+  rescale1
+  scale_weight_norm : bool
+  sigmoid_shift : float
+  softplus : Softplus
+  tanh : Tanh
+  forward(x)
+  reset_parameters()
+}
+class "ST_Net_Softplus" as dig.ggraph.method.GraphAF.model.st_net.ST_Net_Softplus {
+  apply_batch_norm : bool
+  bias : bool
+  bn_before : BatchNorm1d
+  hid_dim : int
+  input_dim
+  linear1 : Linear
+  linear2 : Linear
+  linear3 : Linear
+  num_layers : int
+  output_dim
+  rescale1
+  scale_weight_norm : bool
+  sigmoid_shift : float
+  softplus : Softplus
+  tanh : Tanh
+  forward(x)
+  reset_parameters()
+}
+class "SchNet" as dig.threedgraph.method.schnet.schnet.SchNet {
+  cutoff : float
+  dist_emb
+  energy_and_force : bool
+  hidden_channels : int
+  init_v : Embedding
+  num_filters : int
+  num_gaussians : int
+  num_layers : int
+  update_es : ModuleList
+  update_u
+  update_vs : ModuleList
+  forward(batch_data)
+  reset_parameters()
+}
+class "SentiGraphDataset" as dig.xgraph.dataset.nlp_dataset.SentiGraphDataset {
+  data
+  name
+  processed_dir
+  processed_file_names
+  raw_dir
+  raw_file_names
+  slices : NoneType, defaultdict, dict
+  supplement : dict
+  process()
+}
+class "Sequential" as dig.sslgraph.method.contrastive.views_fn.combination.Sequential {
+  fn_sequence
+  views_fn(data)
+}
+class "ShiftedSoftplus" as dig.threedgraph.method.schnet.schnet.ShiftedSoftplus {
+  shift
+  forward(x)
+}
+class "SimpleInteractionBlock" as dig.threedgraph.method.comenet.comenet.SimpleInteractionBlock {
+  act
+  conv1
+  conv2
+  final
+  lin
+  lin1
+  lin2
+  lin_cat
+  lin_feature1
+  lin_feature2
+  lins : ModuleList
+  norm : GraphNorm
+  forward(x, feature1, feature2, edge_index, batch)
+  reset_parameters()
+}
+class "SpectralNorm" as dig.ggraph.method.GraphEBM.energy_func.SpectralNorm {
+  bound : bool
+  name
+  apply(module, name, bound)
+  compute_weight(module)
+}
+class "SphGen" as dig.ggraph3D.method.G_SphereNet.model.sphgen.SphGen {
+  angle_att : NoneType
+  angle_flow_layers : NoneType, ModuleList
+  deq_coeff : float
+  dist_att : NoneType
+  dist_flow_layers : ModuleList, NoneType
+  feat_net : NoneType
+  focus_mlp : NoneType
+  node_att : NoneType
+  node_flow_layers : ModuleList, NoneType
+  num_node_types
+  torsion_att : NoneType
+  torsion_flow_layers : NoneType, ModuleList
+  use_gpu : bool
+  forward(data_batch)
+  generate(type_to_atomic_number, num_gen, temperature, min_atoms, max_atoms, focus_th)
+}
+class "SphereNet" as dig.threedgraph.method.spherenet.spherenet.SphereNet {
+  cutoff : float
+  emb
+  energy_and_force : bool
+  init_e
+  init_u
+  init_v
+  update_es : ModuleList
+  update_us : ModuleList
+  update_vs : ModuleList
+  forward(batch_data)
+  reset_parameters()
+}
+class "SphereNet" as dig.ggraph3D.method.G_SphereNet.model.spherenet.SphereNet {
+  cutoff
+  emb
+  init_e
+  init_u
+  init_v
+  update_es : ModuleList
+  update_us : ModuleList
+  update_vs : ModuleList
+  dist_only_forward(z, pos, batch)
+  forward(z, pos, batch)
+  reset_parameters()
+}
+class "SubgraphX" as dig.xgraph.method.subgraphx.SubgraphX {
+  c_puct : float
+  device
+  expand_atoms : int
+  explain_graph : bool
+  filename : str
+  high2low : bool
+  local_radius : int
+  mcts_state_map
+  min_atoms : int
+  model
+  new_node_idx : NoneType
+  num_classes : int
+  num_hops : int, NoneType
+  reward_method : str
+  rollout : int
+  sample_num : int
+  save : bool
+  save_dir : Optional[str]
+  subgraph_building_method : str
+  verbose : bool
+  vis : bool
+  explain(x: Tensor, edge_index: Tensor, label: int, max_nodes: int, node_idx: Optional[int], saved_MCTSInfo_list: Optional[List[List]])
+  get_mcts_class(x, edge_index, node_idx: int, score_func: Callable)
+  get_reward_func(value_func, node_idx)
+  read_from_MCTSInfo_list(MCTSInfo_list)
+  update_num_hops(num_hops)
+  visualization(results: list, max_nodes: int, plot_utils: PlotUtils, words: Optional[list], y: Optional[Tensor], title_sentence: Optional[str], vis_name: Optional[str])
+  write_from_MCTSNode_list(MCTSNode_list)
+}
+class "SynGraphDataset" as dig.xgraph.dataset.syn_dataset.SynGraphDataset {
+  data
+  name
+  names : dict
+  processed_dir
+  processed_file_names
+  raw_dir
+  raw_file_names
+  slices : NoneType, defaultdict
+  url : str
+  download()
+  gen_motif_edge_mask(data, node_idx, num_hops)
+  process()
+  read_syn_data()
+}
+class "TUDatasetExt" as dig.sslgraph.dataset.TUDataset.TUDatasetExt {
+  cleaned : bool
+  cleaned_url : str
+  data
+  name
+  num_edge_attributes
+  num_edge_labels
+  num_node_attributes
+  num_node_labels
+  processed_dir
+  processed_file_names
+  processed_filename : str
+  raw_dir
+  raw_file_names
+  slices : NoneType, defaultdict, dict
+  task
+  url : str
+  download()
+  get(idx)
+  get_num_feature()
+  process()
+}
+class "ThreeDEvaluator" as dig.threedgraph.evaluation.eval.ThreeDEvaluator {
+  eval(input_dict)
+}
+class "TwoLayerLinear" as dig.threedgraph.method.comenet.comenet.TwoLayerLinear {
+  act : bool
+  lin1
+  lin2
+  forward(x)
+  reset_parameters()
+}
+class "UniformSample" as dig.sslgraph.method.contrastive.views_fn.sample.UniformSample {
+  ratio : float
+  do_trans(data)
+  views_fn(data)
+}
+class "Vocab" as dig.ggraph.method.JTVAE.fast_jtnn.vocab.Vocab {
+  slots
+  vmap
+  vocab
+  get_index(smiles)
+  get_slots(idx)
+  get_smiles(idx)
+  size()
+}
+class "WalkBase" as dig.xgraph.method.base_explainer.WalkBase {
+  eval_related_pred(x: Tensor, edge_index: Tensor, masks: List[Tensor])
+  explain_edges_with_loop(x: Tensor, walks: Dict[Tensor, Tensor], ex_label)
+  extract_step(x: Tensor, edge_index: Tensor, detach: bool, split_fc: bool)
+  walks_pick(edge_index: Tensor, pick_edge_indices: List, walk_indices: List, num_layers)
+}
+class "XCollector" as dig.xgraph.evaluation.metrics.XCollector {
+  accuracy
+  fidelity
+  fidelity_inv
+  masks : Union[List, List[List[Tensor]]]
+  sparsity
+  stability
+  targets
+  collect_data(masks: List[Tensor], related_preds: dir, label: int) -> None
+  new()
+}
+class "ZINC250k" as dig.ggraph.dataset.ggraph_dataset.ZINC250k {
+}
+class "ZINC800" as dig.ggraph.dataset.ggraph_dataset.ZINC800 {
+}
+class "angle_emb" as dig.threedgraph.method.spherenet.features.angle_emb {
+  bessel_funcs : list
+  cutoff : float
+  num_radial
+  num_spherical
+  sph_funcs : list
+  forward(dist, angle, idx_kj)
+}
+class "angle_emb" as dig.threedgraph.method.comenet.features.angle_emb {
+  bessel_funcs : list
+  cutoff : float
+  num_radial
+  num_spherical
+  sph_funcs : list
+  forward(dist, angle)
+}
+class "angle_emb" as dig.threedgraph.method.dimenetpp.features.angle_emb {
+  bessel_funcs : list
+  cutoff : float
+  envelope
+  num_radial
+  num_spherical
+  sph_funcs : list
+  forward(dist, angle, idx_kj)
+}
+class "angle_emb" as dig.ggraph3D.method.G_SphereNet.model.features.angle_emb {
+  bessel_funcs : list
+  cutoff : float
+  num_radial
+  num_spherical
+  sph_funcs : list
+  forward(dist, angle, idx_kj)
+}
+class "connect_mask" as dig.xgraph.evaluation.metrics.ExplanationProcessor.connect_mask {
+  cls
+}
+class "connect_mask" as dig.xgraph.method.base_explainer.WalkBase.connect_mask {
+  cls
+}
+class "dist_emb" as dig.threedgraph.method.spherenet.features.dist_emb {
+  cutoff : float
+  envelope
+  freq : Parameter
+  forward(dist)
+  reset_parameters()
+}
+class "dist_emb" as dig.threedgraph.method.dimenetpp.features.dist_emb {
+  cutoff : float
+  envelope
+  freq : Parameter
+  forward(dist)
+  reset_parameters()
+}
+class "dist_emb" as dig.ggraph3D.method.G_SphereNet.model.features.dist_emb {
+  cutoff : float
+  envelope
+  freq : Parameter
+  forward(dist)
+  reset_parameters()
+}
+class "emb" as dig.threedgraph.method.spherenet.spherenet.emb {
+  angle_emb
+  dist_emb
+  torsion_emb
+  forward(dist, angle, torsion, idx_kj)
+  reset_parameters()
+}
+class "emb" as dig.threedgraph.method.schnet.schnet.emb {
+  coeff
+  forward(dist)
+}
+class "emb" as dig.threedgraph.method.dimenetpp.dimenetpp.emb {
+  angle_emb
+  dist_emb
+  forward(dist, angle, idx_kj)
+  reset_parameters()
+}
+class "emb" as dig.ggraph3D.method.G_SphereNet.model.spherenet.emb {
+  angle_emb
+  dist_emb
+  torsion_emb
+  forward(dist, angle, torsion, idx_kj)
+  reset_parameters()
+}
+class "init" as dig.threedgraph.method.spherenet.spherenet.init {
+  act
+  emb : Embedding
+  lin : Linear
+  lin_rbf_0 : Linear
+  lin_rbf_1 : Linear
+  node_embedding : Parameter
+  use_node_features : bool
+  forward(x, emb, i, j)
+  reset_parameters()
+}
+class "init" as dig.threedgraph.method.dimenetpp.dimenetpp.init {
+  act
+  emb : Embedding
+  lin : Linear
+  lin_rbf_0 : Linear
+  lin_rbf_1 : Linear
+  forward(x, emb, i, j)
+  reset_parameters()
+}
+class "init" as dig.ggraph3D.method.G_SphereNet.model.spherenet.init {
+  act
+  emb : Embedding
+  lin : Linear
+  lin_rbf_0 : Linear
+  lin_rbf_1 : Linear
+  forward(x, rbf, i, j)
+  reset_parameters()
+}
+class "model_node" as dig.xgraph.method.gradcam.GradCAM.forward.model_node {
+  cls
+  convs
+  forward()
+}
+class "run" as dig.threedgraph.method.run.run {
+  run(device, train_dataset, valid_dataset, test_dataset, model, loss_func, evaluation, epochs, batch_size, vt_batch_size, lr, lr_decay_factor, lr_decay_step_size, weight_decay, energy_and_force, p, save_dir, log_dir)
+  train(model, optimizer, train_loader, energy_and_force, p, loss_func, device)
+  val(model, data_loader, energy_and_force, p, evaluation, device)
+}
+class "torsion_emb" as dig.threedgraph.method.spherenet.features.torsion_emb {
+  bessel_funcs : list
+  cutoff : float
+  num_radial
+  num_spherical
+  sph_funcs : list
+  forward(dist, angle, phi, idx_kj)
+}
+class "torsion_emb" as dig.threedgraph.method.comenet.features.torsion_emb {
+  bessel_funcs : list
+  cutoff : float
+  num_radial
+  num_spherical
+  sph_funcs : list
+  forward(dist, theta, phi)
+}
+class "torsion_emb" as dig.ggraph3D.method.G_SphereNet.model.features.torsion_emb {
+  bessel_funcs : list
+  cutoff : float
+  num_radial
+  num_spherical
+  sph_funcs : list
+  forward(dist, angle, phi, idx_kj)
+}
+class "update_e" as dig.threedgraph.method.spherenet.spherenet.update_e {
+  act
+  layers_after_skip : ModuleList
+  layers_before_skip : ModuleList
+  lin : Linear
+  lin_down : Linear
+  lin_ji : Linear
+  lin_kj : Linear
+  lin_rbf : Linear
+  lin_rbf1 : Linear
+  lin_rbf2 : Linear
+  lin_sbf1 : Linear
+  lin_sbf2 : Linear
+  lin_t1 : Linear
+  lin_t2 : Linear
+  lin_up : Linear
+  forward(x, emb, idx_kj, idx_ji)
+  reset_parameters()
+}
+class "update_e" as dig.threedgraph.method.schnet.schnet.update_e {
+  cutoff
+  lin : Linear
+  mlp : Sequential
+  forward(v, dist, dist_emb, edge_index)
+  reset_parameters()
+}
+class "update_e" as dig.threedgraph.method.dimenetpp.dimenetpp.update_e {
+  act
+  layers_after_skip : ModuleList
+  layers_before_skip : ModuleList
+  lin : Linear
+  lin_down : Linear
+  lin_ji : Linear
+  lin_kj : Linear
+  lin_rbf : Linear
+  lin_rbf1 : Linear
+  lin_rbf2 : Linear
+  lin_sbf1 : Linear
+  lin_sbf2 : Linear
+  lin_up : Linear
+  forward(x, emb, idx_kj, idx_ji)
+  reset_parameters()
+}
+class "update_e" as dig.ggraph3D.method.G_SphereNet.model.spherenet.update_e {
+  act
+  layers_after_skip : ModuleList
+  layers_before_skip : ModuleList
+  lin : Linear
+  lin_down : Linear
+  lin_ji : Linear
+  lin_kj : Linear
+  lin_rbf : Linear
+  lin_rbf1 : Linear
+  lin_rbf2 : Linear
+  lin_sbf1 : Linear
+  lin_sbf2 : Linear
+  lin_t1 : Linear
+  lin_t2 : Linear
+  lin_up : Linear
+  forward(x, emb, idx_kj, idx_ji)
+  reset_parameters()
+}
+class "update_u" as dig.threedgraph.method.spherenet.spherenet.update_u {
+  forward(u, v, batch)
+}
+class "update_u" as dig.threedgraph.method.schnet.schnet.update_u {
+  act
+  lin1 : Linear
+  lin2 : Linear
+  forward(v, batch)
+  reset_parameters()
+}
+class "update_u" as dig.threedgraph.method.dimenetpp.dimenetpp.update_u {
+  forward(u, v, batch)
+}
+class "update_u" as dig.ggraph3D.method.G_SphereNet.model.spherenet.update_u {
+  forward(u, v, batch)
+}
+class "update_v" as dig.threedgraph.method.spherenet.spherenet.update_v {
+  act
+  lin : Linear
+  lin_up : Linear
+  lins : ModuleList
+  output_init
+  forward(e, i)
+  reset_parameters()
+}
+class "update_v" as dig.threedgraph.method.schnet.schnet.update_v {
+  act
+  lin1 : Linear
+  lin2 : Linear
+  forward(v, e, edge_index)
+  reset_parameters()
+}
+class "update_v" as dig.threedgraph.method.dimenetpp.dimenetpp.update_v {
+  act
+  lin : Linear
+  lin_up : Linear
+  lins : ModuleList
+  output_init
+  forward(e, i)
+  reset_parameters()
+}
+class "update_v" as dig.ggraph3D.method.G_SphereNet.model.spherenet.update_v {
+  act
+  lin : Linear
+  lin_up : Linear
+  lins : ModuleList
+  forward(e, i, num_nodes)
+  reset_parameters()
+}
+dig.ggraph.dataset.ggraph_dataset.MOSES --|> dig.ggraph.dataset.PygDataset.PygDataset
+dig.ggraph.dataset.ggraph_dataset.QM9 --|> dig.ggraph.dataset.PygDataset.PygDataset
+dig.ggraph.dataset.ggraph_dataset.ZINC250k --|> dig.ggraph.dataset.PygDataset.PygDataset
+dig.ggraph.dataset.ggraph_dataset.ZINC800 --|> dig.ggraph.dataset.PygDataset.PygDataset
+dig.ggraph.method.GraphAF.graphaf.GraphAF --|> dig.ggraph.method.generator.Generator
+dig.ggraph.method.GraphDF.graphdf.GraphDF --|> dig.ggraph.method.generator.Generator
+dig.ggraph.method.GraphEBM.graphebm.GraphEBM --|> dig.ggraph.method.generator.Generator
+dig.ggraph.method.JTVAE.jtvae.JTVAE --|> dig.ggraph.method.generator.Generator
+dig.sslgraph.method.contrastive.model.grace.GRACE --|> dig.sslgraph.method.contrastive.model.contrastive.Contrastive
+dig.sslgraph.method.contrastive.model.graphcl.GraphCL --|> dig.sslgraph.method.contrastive.model.contrastive.Contrastive
+dig.sslgraph.method.contrastive.model.infograph.InfoGraph --|> dig.sslgraph.method.contrastive.model.contrastive.Contrastive
+dig.sslgraph.method.contrastive.model.mvgrl.MVGRL --|> dig.sslgraph.method.contrastive.model.contrastive.Contrastive
+dig.sslgraph.method.contrastive.model.mvgrl.NodeMVGRL --|> dig.sslgraph.method.contrastive.model.contrastive.Contrastive
+dig.xgraph.method.base_explainer.WalkBase --|> dig.xgraph.method.base_explainer.ExplainerBase
+dig.xgraph.method.deeplift.DeepLIFT --|> dig.xgraph.method.base_explainer.WalkBase
+dig.xgraph.method.gnn_gi.GNN_GI --|> dig.xgraph.method.base_explainer.WalkBase
+dig.xgraph.method.gnn_lrp.GNN_LRP --|> dig.xgraph.method.base_explainer.WalkBase
+dig.xgraph.method.gnnexplainer.GNNExplainer --|> dig.xgraph.method.base_explainer.ExplainerBase
+dig.xgraph.method.gradcam.GradCAM --|> dig.xgraph.method.base_explainer.WalkBase
+dig.xgraph.models.ext.deeplift.deep_lift.DeepLiftShap --|> dig.xgraph.models.ext.deeplift.deep_lift.DeepLift
+dig.xgraph.models.ext.deeplift.layer_deep_lift.LayerDeepLift --|> dig.xgraph.models.ext.deeplift.deep_lift.DeepLift
+dig.xgraph.models.ext.deeplift.layer_deep_lift.LayerDeepLiftShap --|> dig.xgraph.models.ext.deeplift.deep_lift.DeepLiftShap
+dig.xgraph.models.ext.deeplift.layer_deep_lift.LayerDeepLiftShap --|> dig.xgraph.models.ext.deeplift.layer_deep_lift.LayerDeepLift
+dig.xgraph.models.models.GCN_2l --|> dig.xgraph.models.models.GNNBasic
+dig.xgraph.models.models.GCN_2l_mask --|> dig.xgraph.models.models.GNNBasic
+dig.xgraph.models.models.GCN_3l --|> dig.xgraph.models.models.GNNBasic
+dig.xgraph.models.models.GIN_2l --|> dig.xgraph.models.models.GNNBasic
+dig.xgraph.models.models.GIN_2l_mask --|> dig.xgraph.models.models.GNNBasic
+dig.xgraph.models.models.GIN_3l --|> dig.xgraph.models.models.GNNBasic
+dig.xgraph.models.models.GlobalMeanPool --|> dig.xgraph.models.models.GNNPool
+dig.xgraph.models.models.IdenticalPool --|> dig.xgraph.models.models.GNNPool
+dig.ggraph.method.GraphAF.model.graphaf.MaskedGraphAF --* dig.ggraph.method.GraphAF.model.graphflow.GraphFlowModel : flow_core
+dig.ggraph.method.GraphAF.model.graphaf.MaskedGraphAF --* dig.ggraph.method.GraphAF.model.graphflow_con_rl.GraphFlowModel_con_rl : flow_core
+dig.ggraph.method.GraphAF.model.graphaf.MaskedGraphAF --* dig.ggraph.method.GraphAF.model.graphflow_con_rl.GraphFlowModel_con_rl : flow_core_old
+dig.ggraph.method.GraphAF.model.graphaf.MaskedGraphAF --* dig.ggraph.method.GraphAF.model.graphflow_rl.GraphFlowModel_rl : flow_core
+dig.ggraph.method.GraphAF.model.graphaf.MaskedGraphAF --* dig.ggraph.method.GraphAF.model.graphflow_rl.GraphFlowModel_rl : flow_core_old
+dig.ggraph.method.GraphAF.model.graphflow.GraphFlowModel --* dig.ggraph.method.GraphAF.graphaf.GraphAF : model
+dig.ggraph.method.GraphAF.model.graphflow_con_rl.GraphFlowModel_con_rl --* dig.ggraph.method.GraphAF.graphaf.GraphAF : model
+dig.ggraph.method.GraphAF.model.graphflow_rl.GraphFlowModel_rl --* dig.ggraph.method.GraphAF.graphaf.GraphAF : model
+dig.ggraph.method.GraphAF.model.rgcn.RGCN --* dig.ggraph.method.GraphAF.model.graphaf.MaskedGraphAF : rgcn
+dig.ggraph.method.GraphAF.model.rgcn.RelationGraphConvolution --* dig.ggraph.method.GraphAF.model.rgcn.RGCN : gc1
+dig.ggraph.method.GraphAF.model.rgcn.RelationGraphConvolution --* dig.ggraph.method.GraphAF.model.rgcn.RGCN : gc3
+dig.ggraph.method.GraphAF.model.st_net.Rescale --* dig.ggraph.method.GraphAF.model.st_net.ST_Net_Exp : rescale1
+dig.ggraph.method.GraphAF.model.st_net.Rescale --* dig.ggraph.method.GraphAF.model.st_net.ST_Net_Exp : rescale1
+dig.ggraph.method.GraphAF.model.st_net.Rescale --* dig.ggraph.method.GraphAF.model.st_net.ST_Net_Sigmoid : rescale1
+dig.ggraph.method.GraphAF.model.st_net.Rescale --* dig.ggraph.method.GraphAF.model.st_net.ST_Net_Sigmoid : rescale1
+dig.ggraph.method.GraphAF.model.st_net.Rescale --* dig.ggraph.method.GraphAF.model.st_net.ST_Net_Sigmoid : rescale2
+dig.ggraph.method.GraphAF.model.st_net.Rescale --* dig.ggraph.method.GraphAF.model.st_net.ST_Net_Sigmoid : rescale2
+dig.ggraph.method.GraphAF.model.st_net.Rescale_channel --* dig.ggraph.method.GraphAF.model.st_net.ST_Net_Softplus : rescale1
+dig.ggraph.method.GraphAF.model.st_net.Rescale_channel --* dig.ggraph.method.GraphAF.model.st_net.ST_Net_Softplus : rescale1
+dig.ggraph.method.GraphDF.model.disgraphaf.DisGraphAF --* dig.ggraph.method.GraphDF.model.graphflow.GraphFlowModel : flow_core
+dig.ggraph.method.GraphDF.model.disgraphaf.DisGraphAF --* dig.ggraph.method.GraphDF.model.graphflow_con_rl.GraphFlowModel_con_rl : flow_core
+dig.ggraph.method.GraphDF.model.disgraphaf.DisGraphAF --* dig.ggraph.method.GraphDF.model.graphflow_con_rl.GraphFlowModel_con_rl : flow_core_old
+dig.ggraph.method.GraphDF.model.disgraphaf.DisGraphAF --* dig.ggraph.method.GraphDF.model.graphflow_rl.GraphFlowModel_rl : flow_core
+dig.ggraph.method.GraphDF.model.disgraphaf.DisGraphAF --* dig.ggraph.method.GraphDF.model.graphflow_rl.GraphFlowModel_rl : flow_core_old
+dig.ggraph.method.GraphDF.model.graphflow.GraphFlowModel --* dig.ggraph.method.GraphDF.graphdf.GraphDF : model
+dig.ggraph.method.GraphDF.model.graphflow_con_rl.GraphFlowModel_con_rl --* dig.ggraph.method.GraphDF.graphdf.GraphDF : model
+dig.ggraph.method.GraphDF.model.graphflow_rl.GraphFlowModel_rl --* dig.ggraph.method.GraphDF.graphdf.GraphDF : model
+dig.ggraph.method.GraphDF.model.rgcn.RGCN --* dig.ggraph.method.GraphDF.model.disgraphaf.DisGraphAF : rgcn
+dig.ggraph.method.GraphDF.model.rgcn.RelationGraphConvolution --* dig.ggraph.method.GraphDF.model.rgcn.RGCN : gc1
+dig.ggraph.method.GraphDF.model.rgcn.RelationGraphConvolution --* dig.ggraph.method.GraphDF.model.rgcn.RGCN : gc3
+dig.ggraph.method.GraphDF.model.st_net.Rescale --* dig.ggraph.method.GraphDF.model.st_net.ST_Net_Exp : rescale1
+dig.ggraph.method.GraphDF.model.st_net.Rescale --* dig.ggraph.method.GraphDF.model.st_net.ST_Net_Exp : rescale1
+dig.ggraph.method.GraphDF.model.st_net.Rescale --* dig.ggraph.method.GraphDF.model.st_net.ST_Net_Sigmoid : rescale1
+dig.ggraph.method.GraphDF.model.st_net.Rescale --* dig.ggraph.method.GraphDF.model.st_net.ST_Net_Sigmoid : rescale1
+dig.ggraph.method.GraphDF.model.st_net.Rescale --* dig.ggraph.method.GraphDF.model.st_net.ST_Net_Sigmoid : rescale2
+dig.ggraph.method.GraphDF.model.st_net.Rescale --* dig.ggraph.method.GraphDF.model.st_net.ST_Net_Sigmoid : rescale2
+dig.ggraph.method.GraphDF.model.st_net.Rescale_channel --* dig.ggraph.method.GraphDF.model.st_net.ST_Net_Softplus : rescale1
+dig.ggraph.method.GraphDF.model.st_net.Rescale_channel --* dig.ggraph.method.GraphDF.model.st_net.ST_Net_Softplus : rescale1
+dig.ggraph.method.GraphEBM.energy_func.GraphConv --* dig.ggraph.method.GraphEBM.energy_func.EnergyFunc : graphconv1
+dig.ggraph.method.JTVAE.fast_jtnn.jtmpn.JTMPN --* dig.ggraph.method.JTVAE.fast_jtnn.jtnn_vae.JTNNVAE : jtmpn
+dig.ggraph.method.JTVAE.fast_jtnn.jtmpn.JTMPN --* dig.ggraph.method.JTVAE.fast_jtnn.jtnn_vae_bo.JTNNVAEBO : jtmpn
+dig.ggraph.method.JTVAE.fast_jtnn.jtmpn.JTMPN --* dig.ggraph.method.JTVAE.fast_jtnn.jtprop_vae.JTPropVAE : jtmpn
+dig.ggraph.method.JTVAE.fast_jtnn.jtnn_dec.JTNNDecoder --* dig.ggraph.method.JTVAE.fast_jtnn.jtnn_vae.JTNNVAE : decoder
+dig.ggraph.method.JTVAE.fast_jtnn.jtnn_dec.JTNNDecoder --* dig.ggraph.method.JTVAE.fast_jtnn.jtprop_vae.JTPropVAE : decoder
+dig.ggraph.method.JTVAE.fast_jtnn.jtnn_enc.GraphGRU --* dig.ggraph.method.JTVAE.fast_jtnn.jtnn_enc.JTNNEncoder : GRU
+dig.ggraph.method.JTVAE.fast_jtnn.jtnn_enc.JTNNEncoder --* dig.ggraph.method.JTVAE.fast_jtnn.jtnn_vae.JTNNVAE : jtnn
+dig.ggraph.method.JTVAE.fast_jtnn.jtnn_enc.JTNNEncoder --* dig.ggraph.method.JTVAE.fast_jtnn.jtprop_vae.JTPropVAE : jtnn
+dig.ggraph.method.JTVAE.fast_jtnn.jtnn_enc_bo.JTNNEncoderBO --* dig.ggraph.method.JTVAE.fast_jtnn.jtnn_vae_bo.JTNNVAEBO : jtnn
+dig.ggraph.method.JTVAE.fast_jtnn.jtnn_vae.JTNNVAE --* dig.ggraph.method.JTVAE.jtvae.JTVAE : vae
+dig.ggraph.method.JTVAE.fast_jtnn.mpn.MPN --* dig.ggraph.method.JTVAE.fast_jtnn.jtnn_vae.JTNNVAE : mpn
+dig.ggraph.method.JTVAE.fast_jtnn.mpn.MPN --* dig.ggraph.method.JTVAE.fast_jtnn.jtnn_vae_bo.JTNNVAEBO : mpn
+dig.ggraph.method.JTVAE.fast_jtnn.mpn.MPN --* dig.ggraph.method.JTVAE.fast_jtnn.jtprop_vae.JTPropVAE : mpn
+dig.ggraph.method.JTVAE.fast_jtnn.vocab.Vocab --* dig.ggraph.method.JTVAE.fast_jtnn.datautils.MolTreeDataset : vocab
+dig.ggraph3D.method.G_SphereNet.model.att.MH_ATT --* dig.ggraph3D.method.G_SphereNet.model.sphgen.SphGen : node_att
+dig.ggraph3D.method.G_SphereNet.model.att.MH_ATT --* dig.ggraph3D.method.G_SphereNet.model.sphgen.SphGen : dist_att
+dig.ggraph3D.method.G_SphereNet.model.att.MH_ATT --* dig.ggraph3D.method.G_SphereNet.model.sphgen.SphGen : angle_att
+dig.ggraph3D.method.G_SphereNet.model.att.MH_ATT --* dig.ggraph3D.method.G_SphereNet.model.sphgen.SphGen : torsion_att
+dig.ggraph3D.method.G_SphereNet.model.features.Envelope --* dig.ggraph3D.method.G_SphereNet.model.features.dist_emb : envelope
+dig.ggraph3D.method.G_SphereNet.model.features.angle_emb --* dig.ggraph3D.method.G_SphereNet.model.spherenet.emb : angle_emb
+dig.ggraph3D.method.G_SphereNet.model.features.dist_emb --* dig.ggraph3D.method.G_SphereNet.model.spherenet.emb : dist_emb
+dig.ggraph3D.method.G_SphereNet.model.features.torsion_emb --* dig.ggraph3D.method.G_SphereNet.model.spherenet.emb : torsion_emb
+dig.ggraph3D.method.G_SphereNet.model.net_utils.MLP --* dig.ggraph3D.method.G_SphereNet.model.sphgen.SphGen : focus_mlp
+dig.ggraph3D.method.G_SphereNet.model.net_utils.Rescale --* dig.ggraph3D.method.G_SphereNet.model.net_utils.ST_Net_Exp : rescale1
+dig.ggraph3D.method.G_SphereNet.model.spherenet.SphereNet --* dig.ggraph3D.method.G_SphereNet.model.sphgen.SphGen : feat_net
+dig.ggraph3D.method.G_SphereNet.model.spherenet.emb --* dig.ggraph3D.method.G_SphereNet.model.spherenet.SphereNet : emb
+dig.ggraph3D.method.G_SphereNet.model.spherenet.init --* dig.ggraph3D.method.G_SphereNet.model.spherenet.SphereNet : init_e
+dig.ggraph3D.method.G_SphereNet.model.spherenet.update_u --* dig.ggraph3D.method.G_SphereNet.model.spherenet.SphereNet : init_u
+dig.ggraph3D.method.G_SphereNet.model.spherenet.update_v --* dig.ggraph3D.method.G_SphereNet.model.spherenet.SphereNet : init_v
+dig.ggraph3D.method.G_SphereNet.model.sphgen.SphGen --* dig.ggraph3D.method.G_SphereNet.gspherenet.G_SphereNet : model
+dig.sslgraph.utils.encoders.GCN --* dig.sslgraph.utils.encoders.Encoder : encoder
+dig.sslgraph.utils.encoders.GIN --* dig.sslgraph.utils.encoders.Encoder : encoder
+dig.sslgraph.utils.encoders.ResGCN --* dig.sslgraph.utils.encoders.Encoder : encoder
+dig.sslgraph.utils.encoders.ResGCNConv --* dig.sslgraph.utils.encoders.ResGCN : conv_feat
+dig.threedgraph.method.comenet.comenet.EdgeGraphConv --* dig.threedgraph.method.comenet.comenet.SimpleInteractionBlock : conv1
+dig.threedgraph.method.comenet.comenet.EdgeGraphConv --* dig.threedgraph.method.comenet.comenet.SimpleInteractionBlock : conv2
+dig.threedgraph.method.comenet.comenet.EmbeddingBlock --* dig.threedgraph.method.comenet.comenet.ComENet : emb
+dig.threedgraph.method.comenet.comenet.Linear --* dig.threedgraph.method.comenet.comenet.ComENet : lin_out
+dig.threedgraph.method.comenet.comenet.Linear --* dig.threedgraph.method.comenet.comenet.SimpleInteractionBlock : lin1
+dig.threedgraph.method.comenet.comenet.Linear --* dig.threedgraph.method.comenet.comenet.SimpleInteractionBlock : lin2
+dig.threedgraph.method.comenet.comenet.Linear --* dig.threedgraph.method.comenet.comenet.SimpleInteractionBlock : lin_cat
+dig.threedgraph.method.comenet.comenet.Linear --* dig.threedgraph.method.comenet.comenet.SimpleInteractionBlock : lin
+dig.threedgraph.method.comenet.comenet.Linear --* dig.threedgraph.method.comenet.comenet.SimpleInteractionBlock : final
+dig.threedgraph.method.comenet.comenet.Linear --* dig.threedgraph.method.comenet.comenet.TwoLayerLinear : lin1
+dig.threedgraph.method.comenet.comenet.Linear --* dig.threedgraph.method.comenet.comenet.TwoLayerLinear : lin2
+dig.threedgraph.method.comenet.comenet.TwoLayerLinear --* dig.threedgraph.method.comenet.comenet.SimpleInteractionBlock : lin_feature1
+dig.threedgraph.method.comenet.comenet.TwoLayerLinear --* dig.threedgraph.method.comenet.comenet.SimpleInteractionBlock : lin_feature2
+dig.threedgraph.method.comenet.features.angle_emb --* dig.threedgraph.method.comenet.comenet.ComENet : feature2
+dig.threedgraph.method.comenet.features.torsion_emb --* dig.threedgraph.method.comenet.comenet.ComENet : feature1
+dig.threedgraph.method.dimenetpp.dimenetpp.emb --* dig.threedgraph.method.dimenetpp.dimenetpp.DimeNetPP : emb
+dig.threedgraph.method.dimenetpp.dimenetpp.init --* dig.threedgraph.method.dimenetpp.dimenetpp.DimeNetPP : init_e
+dig.threedgraph.method.dimenetpp.dimenetpp.update_u --* dig.threedgraph.method.dimenetpp.dimenetpp.DimeNetPP : init_u
+dig.threedgraph.method.dimenetpp.dimenetpp.update_v --* dig.threedgraph.method.dimenetpp.dimenetpp.DimeNetPP : init_v
+dig.threedgraph.method.dimenetpp.features.Envelope --* dig.threedgraph.method.dimenetpp.features.angle_emb : envelope
+dig.threedgraph.method.dimenetpp.features.Envelope --* dig.threedgraph.method.dimenetpp.features.dist_emb : envelope
+dig.threedgraph.method.dimenetpp.features.angle_emb --* dig.threedgraph.method.dimenetpp.dimenetpp.emb : angle_emb
+dig.threedgraph.method.dimenetpp.features.dist_emb --* dig.threedgraph.method.dimenetpp.dimenetpp.emb : dist_emb
+dig.threedgraph.method.schnet.schnet.ShiftedSoftplus --* dig.threedgraph.method.schnet.schnet.update_u : act
+dig.threedgraph.method.schnet.schnet.ShiftedSoftplus --* dig.threedgraph.method.schnet.schnet.update_v : act
+dig.threedgraph.method.schnet.schnet.emb --* dig.threedgraph.method.schnet.schnet.SchNet : dist_emb
+dig.threedgraph.method.schnet.schnet.update_u --* dig.threedgraph.method.schnet.schnet.SchNet : update_u
+dig.threedgraph.method.spherenet.features.Envelope --* dig.threedgraph.method.spherenet.features.dist_emb : envelope
+dig.threedgraph.method.spherenet.features.angle_emb --* dig.threedgraph.method.spherenet.spherenet.emb : angle_emb
+dig.threedgraph.method.spherenet.features.dist_emb --* dig.threedgraph.method.spherenet.spherenet.emb : dist_emb
+dig.threedgraph.method.spherenet.features.torsion_emb --* dig.threedgraph.method.spherenet.spherenet.emb : torsion_emb
+dig.threedgraph.method.spherenet.spherenet.emb --* dig.threedgraph.method.spherenet.spherenet.SphereNet : emb
+dig.threedgraph.method.spherenet.spherenet.init --* dig.threedgraph.method.spherenet.spherenet.SphereNet : init_e
+dig.threedgraph.method.spherenet.spherenet.update_u --* dig.threedgraph.method.spherenet.spherenet.SphereNet : init_u
+dig.threedgraph.method.spherenet.spherenet.update_v --* dig.threedgraph.method.spherenet.spherenet.SphereNet : init_v
+dig.xgraph.method.gradcam.GraphLayerGradCam --* dig.xgraph.method.gradcam.GradCAM : explain_method
+dig.xgraph.method.subgraphx.MCTS --* dig.xgraph.method.subgraphx.SubgraphX : mcts_state_map
+dig.xgraph.method.subgraphx.MCTS --* dig.xgraph.method.subgraphx.SubgraphX : mcts_state_map
+dig.xgraph.models.models.GCNConv --* dig.xgraph.models.models.GCN_2l : conv1
+dig.xgraph.models.models.GCNConv --* dig.xgraph.models.models.GCN_3l : conv1
+dig.xgraph.models.models.GCNConv_mask --* dig.xgraph.models.models.GCN_2l_mask : conv1
+dig.xgraph.models.models.GINConv --* dig.xgraph.models.models.GIN_2l : conv1
+dig.xgraph.models.models.GINConv --* dig.xgraph.models.models.GIN_3l : conv1
+dig.xgraph.models.models.GINConv_mask --* dig.xgraph.models.models.GIN_2l_mask : conv1
+dig.xgraph.models.models.GlobalMeanPool --* dig.xgraph.models.models.GCN_2l : readout
+dig.xgraph.models.models.GlobalMeanPool --* dig.xgraph.models.models.GCN_2l_mask : readout
+dig.xgraph.models.models.GlobalMeanPool --* dig.xgraph.models.models.GCN_3l : readout
+dig.xgraph.models.models.GlobalMeanPool --* dig.xgraph.models.models.GIN_2l : readout
+dig.xgraph.models.models.GlobalMeanPool --* dig.xgraph.models.models.GIN_2l_mask : readout
+dig.xgraph.models.models.GlobalMeanPool --* dig.xgraph.models.models.GIN_3l : readout
+dig.xgraph.models.models.IdenticalPool --* dig.xgraph.models.models.GCN_2l : readout
+dig.xgraph.models.models.IdenticalPool --* dig.xgraph.models.models.GCN_2l_mask : readout
+dig.xgraph.models.models.IdenticalPool --* dig.xgraph.models.models.GCN_3l : readout
+dig.xgraph.models.models.IdenticalPool --* dig.xgraph.models.models.GIN_2l : readout
+dig.xgraph.models.models.IdenticalPool --* dig.xgraph.models.models.GIN_2l_mask : readout
+dig.xgraph.models.models.IdenticalPool --* dig.xgraph.models.models.GIN_3l : readout
+@enduml

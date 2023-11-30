@@ -1,0 +1,501 @@
+@startuml packages_DIG-dig-stable
+set namespaceSeparator none
+package "dig" as dig {
+}
+package "dig.ggraph" as dig.ggraph {
+}
+package "dig.ggraph.dataset" as dig.ggraph.dataset {
+}
+package "dig.ggraph.dataset.PygDataset" as dig.ggraph.dataset.PygDataset {
+}
+package "dig.ggraph.dataset.ggraph_dataset" as dig.ggraph.dataset.ggraph_dataset {
+}
+package "dig.ggraph.evaluation" as dig.ggraph.evaluation {
+}
+package "dig.ggraph.evaluation.metric" as dig.ggraph.evaluation.metric {
+}
+package "dig.ggraph.method" as dig.ggraph.method {
+}
+package "dig.ggraph.method.GraphAF" as dig.ggraph.method.GraphAF {
+}
+package "dig.ggraph.method.GraphAF.graphaf" as dig.ggraph.method.GraphAF.graphaf {
+}
+package "dig.ggraph.method.GraphAF.model" as dig.ggraph.method.GraphAF.model {
+}
+package "dig.ggraph.method.GraphAF.model.graphaf" as dig.ggraph.method.GraphAF.model.graphaf {
+}
+package "dig.ggraph.method.GraphAF.model.graphflow" as dig.ggraph.method.GraphAF.model.graphflow {
+}
+package "dig.ggraph.method.GraphAF.model.graphflow_con_rl" as dig.ggraph.method.GraphAF.model.graphflow_con_rl {
+}
+package "dig.ggraph.method.GraphAF.model.graphflow_rl" as dig.ggraph.method.GraphAF.model.graphflow_rl {
+}
+package "dig.ggraph.method.GraphAF.model.model_utils" as dig.ggraph.method.GraphAF.model.model_utils {
+}
+package "dig.ggraph.method.GraphAF.model.rgcn" as dig.ggraph.method.GraphAF.model.rgcn {
+}
+package "dig.ggraph.method.GraphAF.model.st_net" as dig.ggraph.method.GraphAF.model.st_net {
+}
+package "dig.ggraph.method.GraphAF.train_utils" as dig.ggraph.method.GraphAF.train_utils {
+}
+package "dig.ggraph.method.GraphDF" as dig.ggraph.method.GraphDF {
+}
+package "dig.ggraph.method.GraphDF.graphdf" as dig.ggraph.method.GraphDF.graphdf {
+}
+package "dig.ggraph.method.GraphDF.model" as dig.ggraph.method.GraphDF.model {
+}
+package "dig.ggraph.method.GraphDF.model.df_utils" as dig.ggraph.method.GraphDF.model.df_utils {
+}
+package "dig.ggraph.method.GraphDF.model.disgraphaf" as dig.ggraph.method.GraphDF.model.disgraphaf {
+}
+package "dig.ggraph.method.GraphDF.model.graphflow" as dig.ggraph.method.GraphDF.model.graphflow {
+}
+package "dig.ggraph.method.GraphDF.model.graphflow_con_rl" as dig.ggraph.method.GraphDF.model.graphflow_con_rl {
+}
+package "dig.ggraph.method.GraphDF.model.graphflow_rl" as dig.ggraph.method.GraphDF.model.graphflow_rl {
+}
+package "dig.ggraph.method.GraphDF.model.rgcn" as dig.ggraph.method.GraphDF.model.rgcn {
+}
+package "dig.ggraph.method.GraphDF.model.st_net" as dig.ggraph.method.GraphDF.model.st_net {
+}
+package "dig.ggraph.method.GraphDF.train_utils" as dig.ggraph.method.GraphDF.train_utils {
+}
+package "dig.ggraph.method.GraphEBM" as dig.ggraph.method.GraphEBM {
+}
+package "dig.ggraph.method.GraphEBM.energy_func" as dig.ggraph.method.GraphEBM.energy_func {
+}
+package "dig.ggraph.method.GraphEBM.graphebm" as dig.ggraph.method.GraphEBM.graphebm {
+}
+package "dig.ggraph.method.GraphEBM.util" as dig.ggraph.method.GraphEBM.util {
+}
+package "dig.ggraph.method.JTVAE" as dig.ggraph.method.JTVAE {
+}
+package "dig.ggraph.method.JTVAE.fast_jtnn" as dig.ggraph.method.JTVAE.fast_jtnn {
+}
+package "dig.ggraph.method.JTVAE.fast_jtnn.chemutils" as dig.ggraph.method.JTVAE.fast_jtnn.chemutils {
+}
+package "dig.ggraph.method.JTVAE.fast_jtnn.datautils" as dig.ggraph.method.JTVAE.fast_jtnn.datautils {
+}
+package "dig.ggraph.method.JTVAE.fast_jtnn.jtmpn" as dig.ggraph.method.JTVAE.fast_jtnn.jtmpn {
+}
+package "dig.ggraph.method.JTVAE.fast_jtnn.jtmpn_bo" as dig.ggraph.method.JTVAE.fast_jtnn.jtmpn_bo {
+}
+package "dig.ggraph.method.JTVAE.fast_jtnn.jtnn_dec" as dig.ggraph.method.JTVAE.fast_jtnn.jtnn_dec {
+}
+package "dig.ggraph.method.JTVAE.fast_jtnn.jtnn_enc" as dig.ggraph.method.JTVAE.fast_jtnn.jtnn_enc {
+}
+package "dig.ggraph.method.JTVAE.fast_jtnn.jtnn_enc_bo" as dig.ggraph.method.JTVAE.fast_jtnn.jtnn_enc_bo {
+}
+package "dig.ggraph.method.JTVAE.fast_jtnn.jtnn_vae" as dig.ggraph.method.JTVAE.fast_jtnn.jtnn_vae {
+}
+package "dig.ggraph.method.JTVAE.fast_jtnn.jtnn_vae_bo" as dig.ggraph.method.JTVAE.fast_jtnn.jtnn_vae_bo {
+}
+package "dig.ggraph.method.JTVAE.fast_jtnn.jtprop_vae" as dig.ggraph.method.JTVAE.fast_jtnn.jtprop_vae {
+}
+package "dig.ggraph.method.JTVAE.fast_jtnn.mol_tree" as dig.ggraph.method.JTVAE.fast_jtnn.mol_tree {
+}
+package "dig.ggraph.method.JTVAE.fast_jtnn.mpn" as dig.ggraph.method.JTVAE.fast_jtnn.mpn {
+}
+package "dig.ggraph.method.JTVAE.fast_jtnn.nnutils" as dig.ggraph.method.JTVAE.fast_jtnn.nnutils {
+}
+package "dig.ggraph.method.JTVAE.fast_jtnn.sascorer" as dig.ggraph.method.JTVAE.fast_jtnn.sascorer {
+}
+package "dig.ggraph.method.JTVAE.fast_jtnn.vocab" as dig.ggraph.method.JTVAE.fast_jtnn.vocab {
+}
+package "dig.ggraph.method.JTVAE.jtvae" as dig.ggraph.method.JTVAE.jtvae {
+}
+package "dig.ggraph.method.generator" as dig.ggraph.method.generator {
+}
+package "dig.ggraph.utils" as dig.ggraph.utils {
+}
+package "dig.ggraph.utils.environment" as dig.ggraph.utils.environment {
+}
+package "dig.ggraph.utils.gen_mol_from_one_shot_tensor" as dig.ggraph.utils.gen_mol_from_one_shot_tensor {
+}
+package "dig.ggraph.utils.sascorer" as dig.ggraph.utils.sascorer {
+}
+package "dig.ggraph3D" as dig.ggraph3D {
+}
+package "dig.ggraph3D.dataset" as dig.ggraph3D.dataset {
+}
+package "dig.ggraph3D.dataset.ggraph3D_dataset" as dig.ggraph3D.dataset.ggraph3D_dataset {
+}
+package "dig.ggraph3D.evaluation" as dig.ggraph3D.evaluation {
+}
+package "dig.ggraph3D.evaluation.metric" as dig.ggraph3D.evaluation.metric {
+}
+package "dig.ggraph3D.method" as dig.ggraph3D.method {
+}
+package "dig.ggraph3D.method.G_SphereNet" as dig.ggraph3D.method.G_SphereNet {
+}
+package "dig.ggraph3D.method.G_SphereNet.gspherenet" as dig.ggraph3D.method.G_SphereNet.gspherenet {
+}
+package "dig.ggraph3D.method.G_SphereNet.model" as dig.ggraph3D.method.G_SphereNet.model {
+}
+package "dig.ggraph3D.method.G_SphereNet.model.att" as dig.ggraph3D.method.G_SphereNet.model.att {
+}
+package "dig.ggraph3D.method.G_SphereNet.model.features" as dig.ggraph3D.method.G_SphereNet.model.features {
+}
+package "dig.ggraph3D.method.G_SphereNet.model.geometric_computing" as dig.ggraph3D.method.G_SphereNet.model.geometric_computing {
+}
+package "dig.ggraph3D.method.G_SphereNet.model.net_utils" as dig.ggraph3D.method.G_SphereNet.model.net_utils {
+}
+package "dig.ggraph3D.method.G_SphereNet.model.spherenet" as dig.ggraph3D.method.G_SphereNet.model.spherenet {
+}
+package "dig.ggraph3D.method.G_SphereNet.model.sphgen" as dig.ggraph3D.method.G_SphereNet.model.sphgen {
+}
+package "dig.ggraph3D.utils" as dig.ggraph3D.utils {
+}
+package "dig.ggraph3D.utils.eval_bond_mmd_utils" as dig.ggraph3D.utils.eval_bond_mmd_utils {
+}
+package "dig.ggraph3D.utils.eval_prop_utils" as dig.ggraph3D.utils.eval_prop_utils {
+}
+package "dig.ggraph3D.utils.eval_validity_utils" as dig.ggraph3D.utils.eval_validity_utils {
+}
+package "dig.sslgraph" as dig.sslgraph {
+}
+package "dig.sslgraph.dataset" as dig.sslgraph.dataset {
+}
+package "dig.sslgraph.dataset.TUDataset" as dig.sslgraph.dataset.TUDataset {
+}
+package "dig.sslgraph.dataset.datasets" as dig.sslgraph.dataset.datasets {
+}
+package "dig.sslgraph.dataset.feat_expansion" as dig.sslgraph.dataset.feat_expansion {
+}
+package "dig.sslgraph.evaluation" as dig.sslgraph.evaluation {
+}
+package "dig.sslgraph.evaluation.eval_graph" as dig.sslgraph.evaluation.eval_graph {
+}
+package "dig.sslgraph.evaluation.eval_node" as dig.sslgraph.evaluation.eval_node {
+}
+package "dig.sslgraph.method" as dig.sslgraph.method {
+}
+package "dig.sslgraph.method.contrastive" as dig.sslgraph.method.contrastive {
+}
+package "dig.sslgraph.method.contrastive.model" as dig.sslgraph.method.contrastive.model {
+}
+package "dig.sslgraph.method.contrastive.model.contrastive" as dig.sslgraph.method.contrastive.model.contrastive {
+}
+package "dig.sslgraph.method.contrastive.model.grace" as dig.sslgraph.method.contrastive.model.grace {
+}
+package "dig.sslgraph.method.contrastive.model.graphcl" as dig.sslgraph.method.contrastive.model.graphcl {
+}
+package "dig.sslgraph.method.contrastive.model.infograph" as dig.sslgraph.method.contrastive.model.infograph {
+}
+package "dig.sslgraph.method.contrastive.model.mvgrl" as dig.sslgraph.method.contrastive.model.mvgrl {
+}
+package "dig.sslgraph.method.contrastive.objectives" as dig.sslgraph.method.contrastive.objectives {
+}
+package "dig.sslgraph.method.contrastive.objectives.infonce" as dig.sslgraph.method.contrastive.objectives.infonce {
+}
+package "dig.sslgraph.method.contrastive.objectives.jse" as dig.sslgraph.method.contrastive.objectives.jse {
+}
+package "dig.sslgraph.method.contrastive.views_fn" as dig.sslgraph.method.contrastive.views_fn {
+}
+package "dig.sslgraph.method.contrastive.views_fn.combination" as dig.sslgraph.method.contrastive.views_fn.combination {
+}
+package "dig.sslgraph.method.contrastive.views_fn.feature" as dig.sslgraph.method.contrastive.views_fn.feature {
+}
+package "dig.sslgraph.method.contrastive.views_fn.sample" as dig.sslgraph.method.contrastive.views_fn.sample {
+}
+package "dig.sslgraph.method.contrastive.views_fn.structure" as dig.sslgraph.method.contrastive.views_fn.structure {
+}
+package "dig.sslgraph.utils" as dig.sslgraph.utils {
+}
+package "dig.sslgraph.utils.encoders" as dig.sslgraph.utils.encoders {
+}
+package "dig.sslgraph.utils.seed" as dig.sslgraph.utils.seed {
+}
+package "dig.threedgraph" as dig.threedgraph {
+}
+package "dig.threedgraph.dataset" as dig.threedgraph.dataset {
+}
+package "dig.threedgraph.dataset.PygMD17" as dig.threedgraph.dataset.PygMD17 {
+}
+package "dig.threedgraph.dataset.PygQM93D" as dig.threedgraph.dataset.PygQM93D {
+}
+package "dig.threedgraph.evaluation" as dig.threedgraph.evaluation {
+}
+package "dig.threedgraph.evaluation.eval" as dig.threedgraph.evaluation.eval {
+}
+package "dig.threedgraph.method" as dig.threedgraph.method {
+}
+package "dig.threedgraph.method.comenet" as dig.threedgraph.method.comenet {
+}
+package "dig.threedgraph.method.comenet.comenet" as dig.threedgraph.method.comenet.comenet {
+}
+package "dig.threedgraph.method.comenet.features" as dig.threedgraph.method.comenet.features {
+}
+package "dig.threedgraph.method.dimenetpp" as dig.threedgraph.method.dimenetpp {
+}
+package "dig.threedgraph.method.dimenetpp.dimenetpp" as dig.threedgraph.method.dimenetpp.dimenetpp {
+}
+package "dig.threedgraph.method.dimenetpp.features" as dig.threedgraph.method.dimenetpp.features {
+}
+package "dig.threedgraph.method.run" as dig.threedgraph.method.run {
+}
+package "dig.threedgraph.method.schnet" as dig.threedgraph.method.schnet {
+}
+package "dig.threedgraph.method.schnet.schnet" as dig.threedgraph.method.schnet.schnet {
+}
+package "dig.threedgraph.method.spherenet" as dig.threedgraph.method.spherenet {
+}
+package "dig.threedgraph.method.spherenet.features" as dig.threedgraph.method.spherenet.features {
+}
+package "dig.threedgraph.method.spherenet.spherenet" as dig.threedgraph.method.spherenet.spherenet {
+}
+package "dig.threedgraph.utils" as dig.threedgraph.utils {
+}
+package "dig.threedgraph.utils.geometric_computing" as dig.threedgraph.utils.geometric_computing {
+}
+package "dig.version" as dig.version {
+}
+package "dig.xgraph" as dig.xgraph {
+}
+package "dig.xgraph.dataset" as dig.xgraph.dataset {
+}
+package "dig.xgraph.dataset.mol_dataset" as dig.xgraph.dataset.mol_dataset {
+}
+package "dig.xgraph.dataset.nlp_dataset" as dig.xgraph.dataset.nlp_dataset {
+}
+package "dig.xgraph.dataset.syn_dataset" as dig.xgraph.dataset.syn_dataset {
+}
+package "dig.xgraph.dataset.utils_dataset" as dig.xgraph.dataset.utils_dataset {
+}
+package "dig.xgraph.evaluation" as dig.xgraph.evaluation {
+}
+package "dig.xgraph.evaluation.defi" as dig.xgraph.evaluation.defi {
+}
+package "dig.xgraph.evaluation.metrics" as dig.xgraph.evaluation.metrics {
+}
+package "dig.xgraph.method" as dig.xgraph.method {
+}
+package "dig.xgraph.method.base_explainer" as dig.xgraph.method.base_explainer {
+}
+package "dig.xgraph.method.deeplift" as dig.xgraph.method.deeplift {
+}
+package "dig.xgraph.method.gnn_gi" as dig.xgraph.method.gnn_gi {
+}
+package "dig.xgraph.method.gnn_lrp" as dig.xgraph.method.gnn_lrp {
+}
+package "dig.xgraph.method.gnnexplainer" as dig.xgraph.method.gnnexplainer {
+}
+package "dig.xgraph.method.gradcam" as dig.xgraph.method.gradcam {
+}
+package "dig.xgraph.method.pgexplainer" as dig.xgraph.method.pgexplainer {
+}
+package "dig.xgraph.method.shapley" as dig.xgraph.method.shapley {
+}
+package "dig.xgraph.method.subgraphx" as dig.xgraph.method.subgraphx {
+}
+package "dig.xgraph.models" as dig.xgraph.models {
+}
+package "dig.xgraph.models.ext" as dig.xgraph.models.ext {
+}
+package "dig.xgraph.models.ext.deeplift" as dig.xgraph.models.ext.deeplift {
+}
+package "dig.xgraph.models.ext.deeplift.deep_lift" as dig.xgraph.models.ext.deeplift.deep_lift {
+}
+package "dig.xgraph.models.ext.deeplift.layer_deep_lift" as dig.xgraph.models.ext.deeplift.layer_deep_lift {
+}
+package "dig.xgraph.models.gradient_utils" as dig.xgraph.models.gradient_utils {
+}
+package "dig.xgraph.models.model_manager" as dig.xgraph.models.model_manager {
+}
+package "dig.xgraph.models.models" as dig.xgraph.models.models {
+}
+package "dig.xgraph.models.utils" as dig.xgraph.models.utils {
+}
+package "dig.xgraph.utils" as dig.xgraph.utils {
+}
+package "dig.xgraph.utils.compatibility" as dig.xgraph.utils.compatibility {
+}
+package "dig.xgraph.utils.init" as dig.xgraph.utils.init {
+}
+dig.ggraph.dataset --> dig.ggraph.dataset.PygDataset
+dig.ggraph.dataset --> dig.ggraph.dataset.ggraph_dataset
+dig.ggraph.dataset.ggraph_dataset --> dig.ggraph.dataset
+dig.ggraph.evaluation --> dig.ggraph.evaluation.metric
+dig.ggraph.evaluation.metric --> dig.ggraph.utils
+dig.ggraph.method --> dig.ggraph.method.GraphAF
+dig.ggraph.method --> dig.ggraph.method.GraphDF
+dig.ggraph.method --> dig.ggraph.method.GraphEBM.graphebm
+dig.ggraph.method --> dig.ggraph.method.JTVAE.jtvae
+dig.ggraph.method --> dig.ggraph.method.generator
+dig.ggraph.method.GraphAF --> dig.ggraph.method.GraphAF.graphaf
+dig.ggraph.method.GraphAF.graphaf --> dig.ggraph.method
+dig.ggraph.method.GraphAF.graphaf --> dig.ggraph.method.GraphAF.model
+dig.ggraph.method.GraphAF.graphaf --> dig.ggraph.method.GraphAF.train_utils
+dig.ggraph.method.GraphAF.model --> dig.ggraph.method.GraphAF.model.graphflow
+dig.ggraph.method.GraphAF.model --> dig.ggraph.method.GraphAF.model.graphflow_con_rl
+dig.ggraph.method.GraphAF.model --> dig.ggraph.method.GraphAF.model.graphflow_rl
+dig.ggraph.method.GraphAF.model.graphaf --> dig.ggraph.method.GraphAF.model.rgcn
+dig.ggraph.method.GraphAF.model.graphaf --> dig.ggraph.method.GraphAF.model.st_net
+dig.ggraph.method.GraphAF.model.graphflow --> dig.ggraph.method.GraphAF.model.graphaf
+dig.ggraph.method.GraphAF.model.graphflow --> dig.ggraph.utils
+dig.ggraph.method.GraphAF.model.graphflow_con_rl --> dig.ggraph.method.GraphAF.model.graphaf
+dig.ggraph.method.GraphAF.model.graphflow_con_rl --> dig.ggraph.utils
+dig.ggraph.method.GraphAF.model.graphflow_rl --> dig.ggraph.method.GraphAF.model.graphaf
+dig.ggraph.method.GraphAF.model.graphflow_rl --> dig.ggraph.utils
+dig.ggraph.method.GraphDF --> dig.ggraph.method.GraphDF.graphdf
+dig.ggraph.method.GraphDF.graphdf --> dig.ggraph.method
+dig.ggraph.method.GraphDF.graphdf --> dig.ggraph.method.GraphDF.model
+dig.ggraph.method.GraphDF.graphdf --> dig.ggraph.method.GraphDF.train_utils
+dig.ggraph.method.GraphDF.model --> dig.ggraph.method.GraphDF.model.graphflow
+dig.ggraph.method.GraphDF.model --> dig.ggraph.method.GraphDF.model.graphflow_con_rl
+dig.ggraph.method.GraphDF.model --> dig.ggraph.method.GraphDF.model.graphflow_rl
+dig.ggraph.method.GraphDF.model.disgraphaf --> dig.ggraph.method.GraphDF.model.df_utils
+dig.ggraph.method.GraphDF.model.disgraphaf --> dig.ggraph.method.GraphDF.model.rgcn
+dig.ggraph.method.GraphDF.model.disgraphaf --> dig.ggraph.method.GraphDF.model.st_net
+dig.ggraph.method.GraphDF.model.graphflow --> dig.ggraph.method.GraphDF.model.disgraphaf
+dig.ggraph.method.GraphDF.model.graphflow --> dig.ggraph.utils
+dig.ggraph.method.GraphDF.model.graphflow_con_rl --> dig.ggraph.method.GraphDF.model.disgraphaf
+dig.ggraph.method.GraphDF.model.graphflow_con_rl --> dig.ggraph.utils
+dig.ggraph.method.GraphDF.model.graphflow_rl --> dig.ggraph.method.GraphDF.model.disgraphaf
+dig.ggraph.method.GraphDF.model.graphflow_rl --> dig.ggraph.utils
+dig.ggraph.method.GraphDF.model.st_net --> dig.ggraph.method.GraphDF.model.df_utils
+dig.ggraph.method.GraphEBM.graphebm --> dig.ggraph.method
+dig.ggraph.method.GraphEBM.graphebm --> dig.ggraph.method.GraphEBM.energy_func
+dig.ggraph.method.GraphEBM.graphebm --> dig.ggraph.method.GraphEBM.util
+dig.ggraph.method.GraphEBM.graphebm --> dig.ggraph.utils
+dig.ggraph.method.JTVAE --> dig.ggraph.method.JTVAE.jtvae
+dig.ggraph.method.JTVAE.fast_jtnn --> dig.ggraph.method.JTVAE.fast_jtnn.datautils
+dig.ggraph.method.JTVAE.fast_jtnn --> dig.ggraph.method.JTVAE.fast_jtnn.jtmpn
+dig.ggraph.method.JTVAE.fast_jtnn --> dig.ggraph.method.JTVAE.fast_jtnn.jtnn_enc
+dig.ggraph.method.JTVAE.fast_jtnn --> dig.ggraph.method.JTVAE.fast_jtnn.jtnn_vae
+dig.ggraph.method.JTVAE.fast_jtnn --> dig.ggraph.method.JTVAE.fast_jtnn.mol_tree
+dig.ggraph.method.JTVAE.fast_jtnn --> dig.ggraph.method.JTVAE.fast_jtnn.mpn
+dig.ggraph.method.JTVAE.fast_jtnn --> dig.ggraph.method.JTVAE.fast_jtnn.nnutils
+dig.ggraph.method.JTVAE.fast_jtnn --> dig.ggraph.method.JTVAE.fast_jtnn.vocab
+dig.ggraph.method.JTVAE.fast_jtnn.chemutils --> dig.ggraph.method.JTVAE.fast_jtnn.mol_tree
+dig.ggraph.method.JTVAE.fast_jtnn.chemutils --> dig.ggraph.method.JTVAE.fast_jtnn.vocab
+dig.ggraph.method.JTVAE.fast_jtnn.datautils --> dig.ggraph.method.JTVAE.fast_jtnn.jtmpn
+dig.ggraph.method.JTVAE.fast_jtnn.datautils --> dig.ggraph.method.JTVAE.fast_jtnn.jtnn_enc
+dig.ggraph.method.JTVAE.fast_jtnn.datautils --> dig.ggraph.method.JTVAE.fast_jtnn.mol_tree
+dig.ggraph.method.JTVAE.fast_jtnn.datautils --> dig.ggraph.method.JTVAE.fast_jtnn.mpn
+dig.ggraph.method.JTVAE.fast_jtnn.datautils --> dig.ggraph.method.JTVAE.fast_jtnn.vocab
+dig.ggraph.method.JTVAE.fast_jtnn.jtmpn --> dig.ggraph.method.JTVAE.fast_jtnn.nnutils
+dig.ggraph.method.JTVAE.fast_jtnn.jtmpn_bo --> dig.ggraph.method.JTVAE.fast_jtnn.nnutils
+dig.ggraph.method.JTVAE.fast_jtnn.jtnn_dec --> dig.ggraph.method.JTVAE.fast_jtnn.chemutils
+dig.ggraph.method.JTVAE.fast_jtnn.jtnn_dec --> dig.ggraph.method.JTVAE.fast_jtnn.mol_tree
+dig.ggraph.method.JTVAE.fast_jtnn.jtnn_dec --> dig.ggraph.method.JTVAE.fast_jtnn.nnutils
+dig.ggraph.method.JTVAE.fast_jtnn.jtnn_enc --> dig.ggraph.method.JTVAE.fast_jtnn.mol_tree
+dig.ggraph.method.JTVAE.fast_jtnn.jtnn_enc --> dig.ggraph.method.JTVAE.fast_jtnn.nnutils
+dig.ggraph.method.JTVAE.fast_jtnn.jtnn_enc_bo --> dig.ggraph.method.JTVAE.fast_jtnn.nnutils
+dig.ggraph.method.JTVAE.fast_jtnn.jtnn_vae --> dig.ggraph.method.JTVAE.fast_jtnn.chemutils
+dig.ggraph.method.JTVAE.fast_jtnn.jtnn_vae --> dig.ggraph.method.JTVAE.fast_jtnn.datautils
+dig.ggraph.method.JTVAE.fast_jtnn.jtnn_vae --> dig.ggraph.method.JTVAE.fast_jtnn.jtmpn
+dig.ggraph.method.JTVAE.fast_jtnn.jtnn_vae --> dig.ggraph.method.JTVAE.fast_jtnn.jtnn_dec
+dig.ggraph.method.JTVAE.fast_jtnn.jtnn_vae --> dig.ggraph.method.JTVAE.fast_jtnn.jtnn_enc
+dig.ggraph.method.JTVAE.fast_jtnn.jtnn_vae --> dig.ggraph.method.JTVAE.fast_jtnn.mol_tree
+dig.ggraph.method.JTVAE.fast_jtnn.jtnn_vae --> dig.ggraph.method.JTVAE.fast_jtnn.mpn
+dig.ggraph.method.JTVAE.fast_jtnn.jtnn_vae --> dig.ggraph.method.JTVAE.fast_jtnn.nnutils
+dig.ggraph.method.JTVAE.fast_jtnn.jtnn_vae_bo --> dig.ggraph.method.JTVAE.fast_jtnn.chemutils
+dig.ggraph.method.JTVAE.fast_jtnn.jtnn_vae_bo --> dig.ggraph.method.JTVAE.fast_jtnn.jtmpn
+dig.ggraph.method.JTVAE.fast_jtnn.jtnn_vae_bo --> dig.ggraph.method.JTVAE.fast_jtnn.jtnn_dec
+dig.ggraph.method.JTVAE.fast_jtnn.jtnn_vae_bo --> dig.ggraph.method.JTVAE.fast_jtnn.jtnn_enc_bo
+dig.ggraph.method.JTVAE.fast_jtnn.jtnn_vae_bo --> dig.ggraph.method.JTVAE.fast_jtnn.mol_tree
+dig.ggraph.method.JTVAE.fast_jtnn.jtnn_vae_bo --> dig.ggraph.method.JTVAE.fast_jtnn.mpn
+dig.ggraph.method.JTVAE.fast_jtnn.jtnn_vae_bo --> dig.ggraph.method.JTVAE.fast_jtnn.nnutils
+dig.ggraph.method.JTVAE.fast_jtnn.jtprop_vae --> dig.ggraph.method.JTVAE.fast_jtnn.chemutils
+dig.ggraph.method.JTVAE.fast_jtnn.jtprop_vae --> dig.ggraph.method.JTVAE.fast_jtnn.jtmpn
+dig.ggraph.method.JTVAE.fast_jtnn.jtprop_vae --> dig.ggraph.method.JTVAE.fast_jtnn.jtnn_dec
+dig.ggraph.method.JTVAE.fast_jtnn.jtprop_vae --> dig.ggraph.method.JTVAE.fast_jtnn.jtnn_enc
+dig.ggraph.method.JTVAE.fast_jtnn.jtprop_vae --> dig.ggraph.method.JTVAE.fast_jtnn.mol_tree
+dig.ggraph.method.JTVAE.fast_jtnn.jtprop_vae --> dig.ggraph.method.JTVAE.fast_jtnn.mpn
+dig.ggraph.method.JTVAE.fast_jtnn.jtprop_vae --> dig.ggraph.method.JTVAE.fast_jtnn.nnutils
+dig.ggraph.method.JTVAE.fast_jtnn.mol_tree --> dig.ggraph.method.JTVAE.fast_jtnn.chemutils
+dig.ggraph.method.JTVAE.fast_jtnn.mol_tree --> dig.ggraph.method.JTVAE.fast_jtnn.vocab
+dig.ggraph.method.JTVAE.fast_jtnn.mpn --> dig.ggraph.method.JTVAE.fast_jtnn.chemutils
+dig.ggraph.method.JTVAE.fast_jtnn.mpn --> dig.ggraph.method.JTVAE.fast_jtnn.nnutils
+dig.ggraph.method.JTVAE.jtvae --> dig.ggraph.method
+dig.ggraph.utils --> dig.ggraph.utils.environment
+dig.ggraph.utils --> dig.ggraph.utils.gen_mol_from_one_shot_tensor
+dig.ggraph.utils.environment --> dig.ggraph.utils.sascorer
+dig.ggraph3D.dataset --> dig.ggraph3D.dataset.ggraph3D_dataset
+dig.ggraph3D.evaluation --> dig.ggraph3D.evaluation.metric
+dig.ggraph3D.evaluation.metric --> dig.ggraph3D.utils
+dig.ggraph3D.method --> dig.ggraph3D.method.G_SphereNet
+dig.ggraph3D.method.G_SphereNet --> dig.ggraph3D.method.G_SphereNet.gspherenet
+dig.ggraph3D.method.G_SphereNet.gspherenet --> dig.ggraph3D.method.G_SphereNet.model
+dig.ggraph3D.method.G_SphereNet.model --> dig.ggraph3D.method.G_SphereNet.model.sphgen
+dig.ggraph3D.method.G_SphereNet.model.spherenet --> dig.ggraph3D.method.G_SphereNet.model.features
+dig.ggraph3D.method.G_SphereNet.model.spherenet --> dig.ggraph3D.method.G_SphereNet.model.geometric_computing
+dig.ggraph3D.method.G_SphereNet.model.sphgen --> dig.ggraph3D.method.G_SphereNet.model.att
+dig.ggraph3D.method.G_SphereNet.model.sphgen --> dig.ggraph3D.method.G_SphereNet.model.geometric_computing
+dig.ggraph3D.method.G_SphereNet.model.sphgen --> dig.ggraph3D.method.G_SphereNet.model.net_utils
+dig.ggraph3D.method.G_SphereNet.model.sphgen --> dig.ggraph3D.method.G_SphereNet.model.spherenet
+dig.ggraph3D.utils --> dig.ggraph3D.utils.eval_bond_mmd_utils
+dig.ggraph3D.utils --> dig.ggraph3D.utils.eval_prop_utils
+dig.ggraph3D.utils --> dig.ggraph3D.utils.eval_validity_utils
+dig.sslgraph.dataset --> dig.sslgraph.dataset.TUDataset
+dig.sslgraph.dataset --> dig.sslgraph.dataset.datasets
+dig.sslgraph.dataset.datasets --> dig.sslgraph.dataset.TUDataset
+dig.sslgraph.dataset.datasets --> dig.sslgraph.dataset.feat_expansion
+dig.sslgraph.evaluation --> dig.sslgraph.evaluation.eval_graph
+dig.sslgraph.evaluation --> dig.sslgraph.evaluation.eval_node
+dig.sslgraph.method --> dig.sslgraph.method.contrastive.model
+dig.sslgraph.method.contrastive.model --> dig.sslgraph.method.contrastive.model.contrastive
+dig.sslgraph.method.contrastive.model --> dig.sslgraph.method.contrastive.model.grace
+dig.sslgraph.method.contrastive.model --> dig.sslgraph.method.contrastive.model.graphcl
+dig.sslgraph.method.contrastive.model --> dig.sslgraph.method.contrastive.model.infograph
+dig.sslgraph.method.contrastive.model --> dig.sslgraph.method.contrastive.model.mvgrl
+dig.sslgraph.method.contrastive.model.contrastive --> dig.sslgraph.method.contrastive.objectives
+dig.sslgraph.method.contrastive.model.grace --> dig.sslgraph.method.contrastive.model.contrastive
+dig.sslgraph.method.contrastive.model.grace --> dig.sslgraph.method.contrastive.views_fn
+dig.sslgraph.method.contrastive.model.graphcl --> dig.sslgraph.method.contrastive.model.contrastive
+dig.sslgraph.method.contrastive.model.graphcl --> dig.sslgraph.method.contrastive.views_fn
+dig.sslgraph.method.contrastive.model.infograph --> dig.sslgraph.method.contrastive.model.contrastive
+dig.sslgraph.method.contrastive.model.mvgrl --> dig.sslgraph.method.contrastive.model.contrastive
+dig.sslgraph.method.contrastive.model.mvgrl --> dig.sslgraph.method.contrastive.views_fn
+dig.sslgraph.method.contrastive.objectives --> dig.sslgraph.method.contrastive.objectives.infonce
+dig.sslgraph.method.contrastive.objectives --> dig.sslgraph.method.contrastive.objectives.jse
+dig.sslgraph.method.contrastive.views_fn --> dig.sslgraph.method.contrastive.views_fn.combination
+dig.sslgraph.method.contrastive.views_fn --> dig.sslgraph.method.contrastive.views_fn.feature
+dig.sslgraph.method.contrastive.views_fn --> dig.sslgraph.method.contrastive.views_fn.sample
+dig.sslgraph.method.contrastive.views_fn --> dig.sslgraph.method.contrastive.views_fn.structure
+dig.sslgraph.utils --> dig.sslgraph.utils.encoders
+dig.sslgraph.utils --> dig.sslgraph.utils.seed
+dig.threedgraph.dataset --> dig.threedgraph.dataset.PygMD17
+dig.threedgraph.dataset --> dig.threedgraph.dataset.PygQM93D
+dig.threedgraph.evaluation --> dig.threedgraph.evaluation.eval
+dig.threedgraph.method --> dig.threedgraph.method.comenet
+dig.threedgraph.method --> dig.threedgraph.method.dimenetpp
+dig.threedgraph.method --> dig.threedgraph.method.run
+dig.threedgraph.method --> dig.threedgraph.method.schnet
+dig.threedgraph.method --> dig.threedgraph.method.spherenet
+dig.threedgraph.method.comenet --> dig.threedgraph.method.comenet.comenet
+dig.threedgraph.method.comenet.comenet --> dig.threedgraph.method.comenet.features
+dig.threedgraph.method.dimenetpp --> dig.threedgraph.method.dimenetpp
+dig.threedgraph.method.dimenetpp --> dig.threedgraph.method.dimenetpp.features
+dig.threedgraph.method.dimenetpp.dimenetpp --> dig.threedgraph.method.dimenetpp.features
+dig.threedgraph.method.schnet --> dig.threedgraph.method.schnet
+dig.threedgraph.method.spherenet --> dig.threedgraph.method.spherenet
+dig.threedgraph.method.spherenet --> dig.threedgraph.method.spherenet.features
+dig.threedgraph.method.spherenet.spherenet --> dig.threedgraph.method.spherenet.features
+dig.threedgraph.utils --> dig.threedgraph.utils.geometric_computing
+dig.xgraph.dataset --> dig.xgraph.dataset.mol_dataset
+dig.xgraph.dataset --> dig.xgraph.dataset.nlp_dataset
+dig.xgraph.dataset --> dig.xgraph.dataset.syn_dataset
+dig.xgraph.dataset --> dig.xgraph.dataset.utils_dataset
+dig.xgraph.evaluation --> dig.xgraph.evaluation.metrics
+dig.xgraph.method --> dig.xgraph.method.deeplift
+dig.xgraph.method --> dig.xgraph.method.gnn_gi
+dig.xgraph.method --> dig.xgraph.method.gnn_lrp
+dig.xgraph.method --> dig.xgraph.method.gnnexplainer
+dig.xgraph.method --> dig.xgraph.method.gradcam
+dig.xgraph.method --> dig.xgraph.method.pgexplainer
+dig.xgraph.method --> dig.xgraph.method.subgraphx
+dig.xgraph.method.deeplift --> dig.xgraph.method.base_explainer
+dig.xgraph.method.gnn_gi --> dig.xgraph.method.base_explainer
+dig.xgraph.method.gnn_lrp --> dig.xgraph.method.base_explainer
+dig.xgraph.method.gnnexplainer --> dig.version
+dig.xgraph.method.gnnexplainer --> dig.xgraph.method.base_explainer
+dig.xgraph.method.gradcam --> dig.xgraph.method.base_explainer
+dig.xgraph.method.pgexplainer --> dig.xgraph.method.shapley
+dig.xgraph.method.subgraphx --> dig.xgraph.method.shapley
+dig.xgraph.models --> dig.xgraph.models
+dig.xgraph.models --> dig.xgraph.models.model_manager
+dig.xgraph.models --> dig.xgraph.models.utils
+dig.xgraph.models.ext.deeplift.layer_deep_lift --> dig.xgraph.models.ext.deeplift.deep_lift
+@enduml

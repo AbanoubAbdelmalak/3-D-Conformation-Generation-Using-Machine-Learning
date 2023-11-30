@@ -1,0 +1,27 @@
+@startuml packages_GeoMol
+set namespaceSeparator none
+package "model" as model {
+}
+package "model.GNN" as model.GNN {
+}
+package "model.cycle_utils" as model.cycle_utils {
+}
+package "model.featurization" as model.featurization {
+}
+package "model.inference" as model.inference {
+}
+package "model.model" as model.model {
+}
+package "model.parsing" as model.parsing {
+}
+package "model.training" as model.training {
+}
+package "model.utils" as model.utils {
+}
+model.featurization --> model.utils
+model.inference --> model.cycle_utils
+model.inference --> model.utils
+model.model --> model.GNN
+model.model --> model.utils
+model.utils --> model.cycle_utils
+@enduml

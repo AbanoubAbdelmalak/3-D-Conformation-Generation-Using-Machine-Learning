@@ -1,0 +1,5 @@
+[submodule "GeoMol"]
+	path = GeoMol
+	url = https://github.com/PattanaikL/GeoMol.git
+
+

@@ -1,0 +1,167 @@
+@startuml classes_GeoMol
+set namespaceSeparator none
+class "EdgeModel" as model.GNN.EdgeModel {
+  edge : Linear
+  mlp
+  node_in : Linear
+  node_out : Linear
+  forward(x, edge_attr, edge_index)
+}
+class "GNN" as model.GNN.GNN {
+  depth : int
+  edge_init
+  node_init
+  update
+  forward(x, edge_index, edge_attr)
+}
+class "GeoMol" as model.model.GeoMol {
+  alpha_mlp
+  angle_loss : list
+  angle_loss_write : int
+  c_ij
+  c_mlp
+  coord_pred
+  d_mlp
+  device
+  dihedral_loss : list
+  dihedral_loss_write : int
+  dihedral_mask
+  dihedral_pairs
+  dihedral_x_mask
+  dihedral_y_mask
+  encoder : TransformerEncoderLayer
+  global_embed : TransformerEncoderLayer
+  global_transformer
+  gnn
+  gnn2
+  h_mol_mlp
+  leaf_hydrogens : dict
+  loss : MSELoss
+  loss_type
+  model_dim
+  model_local_coords
+  model_stats : tuple
+  n_dihedral_pairs
+  n_model_confs : NoneType
+  n_neighborhoods
+  n_true_confs
+  neighbor_mask
+  neighborhood_pairs_to_mol_map
+  neighborhood_to_mol_map
+  neighbors
+  one_hop_loss : list
+  one_hop_loss_write : int
+  pT_final
+  pY_final
+  p_coords
+  qZ_final
+  q_coords
+  random_alpha
+  random_vec_dim
+  random_vec_std
+  teacher_force
+  three_hop_loss : list
+  three_hop_loss_write : int
+  true_local_coords
+  true_p_coords
+  true_q_coords
+  true_stats : tuple
+  true_x_coords
+  true_y_coords
+  two_hop_loss : list
+  two_hop_loss_write : int
+  v_star
+  x_map_to_neighbor_y
+  x_to_h_map
+  xy_bond_type
+  y_map_to_neighbor_x
+  align_dihedral_neighbors(dihedral_node_reps, dihedral_neighbors, batch, h_mol, dihedral_neighbor_reps)
+  assign_neighborhoods(x, edge_index, edge_attr, batch, data)
+  batch_model_stats(x1, x2, batch, h_mol, chiral_tag)
+  batch_molecule_loss(true_stats, model_stats, ignore_neighbors)
+  batch_true_stats(pos)
+  build_A_matrix(curr_sin, curr_cos)
+  build_alpha_rotation(alpha, alpha_cos)
+  embed(x, edge_index, edge_attr, batch)
+  forward(data, ignore_neighbors, inference, n_model_confs)
+  generate_model_prediction(x, edge_index, edge_attr, batch, chiral_tag)
+  ground_truth_local_stats(pos)
+  ground_truth_pair_stats(pos)
+  local_loss(true_one_hop, true_two_hop, true_angles, model_one_hop, model_two_hop, model_angles)
+  model_local_stats(x, chiral_tag)
+  model_pair_stats(x, batch, h_mol)
+  pair_loss(true_dihedrals, model_dihedrals, true_three_hop, model_three_hop)
+  run_writer_mle(L1, molecule_loss, pos_mask_L2)
+  run_writer_ot_emd(ot_mat_list, n_true_confs_batch)
+}
+class "MLP" as model.GNN.MLP {
+  layers : ModuleList
+  forward(x)
+}
+class "MetaLayer" as model.GNN.MetaLayer {
+  edge_eps : Parameter
+  edge_model : NoneType
+  node_eps : Parameter
+  node_model : NoneType
+  forward(x, edge_index, edge_attr, batch)
+  reset_parameters()
+}
+class "NoamLR" as model.training.NoamLR {
+  current_step : int, NoneType
+  exponential_gamma
+  final_lr : ndarray
+  init_lr : ndarray
+  linear_increment
+  lr : List[float]
+  max_lr : ndarray
+  num_lrs
+  optimizer : Optimizer
+  steps_per_epoch : int
+  total_epochs : ndarray
+  total_steps
+  warmup_epochs : ndarray
+  warmup_steps
+  get_lr() -> List[float]
+  step(current_step: int)
+}
+class "NodeModel" as model.GNN.NodeModel {
+  node_mlp_1
+  node_mlp_2
+  forward(x, edge_index, edge_attr, batch)
+}
+class "drugs_confs" as model.featurization.drugs_confs {
+  types : dict
+}
+class "geom_confs" as model.featurization.geom_confs {
+  bonds : dict
+  dihedral_pairs : dict
+  max_confs : int
+  pickle_files
+  root
+  split
+  split_idx : int
+  featurize_mol(mol_dic)
+  get(idx)
+  len()
+  open_pickle(mol_path)
+}
+class "qm9_confs" as model.featurization.qm9_confs {
+  types : dict
+}
+model.featurization.drugs_confs --|> model.featurization.geom_confs
+model.featurization.qm9_confs --|> model.featurization.geom_confs
+model.GNN.GNN --* model.model.GeoMol : gnn
+model.GNN.GNN --* model.model.GeoMol : gnn2
+model.GNN.MLP --* model.GNN.EdgeModel : mlp
+model.GNN.MLP --* model.GNN.GNN : node_init
+model.GNN.MLP --* model.GNN.GNN : edge_init
+model.GNN.MLP --* model.GNN.NodeModel : node_mlp_1
+model.GNN.MLP --* model.GNN.NodeModel : node_mlp_2
+model.GNN.MLP --* model.model.GeoMol : coord_pred
+model.GNN.MLP --* model.model.GeoMol : d_mlp
+model.GNN.MLP --* model.model.GeoMol : h_mol_mlp
+model.GNN.MLP --* model.model.GeoMol : alpha_mlp
+model.GNN.MLP --* model.model.GeoMol : alpha_mlp
+model.GNN.MLP --* model.model.GeoMol : c_mlp
+model.GNN.MetaLayer --* model.GNN.GNN : update
+@enduml
